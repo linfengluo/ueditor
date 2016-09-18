@@ -45,7 +45,7 @@ UE.plugins['fiximgclick'] = (function () {
                 //
                 hands.push('<div class="edui-scale-toolbar">' +
                     '<a href="javascript:;" class="edui-scale-item" data-type="0">原始大小</a>' +
-                    '<a href="javascript:;" class="edui-scale-item" data-type="1">放大</a>' +
+                    '<a href="javascript:;" class="edui-scale-item" data-type="1" id="J_scaleBigger">放大</a>' +
                     '<a href="javascript:;" class="edui-scale-item" data-type="2">缩小</a>' +
                     '<a href="javascript:;" class="edui-scale-item" data-type="3">删除</a>' +
                     '<a href="javascript:;" class="edui-scale-item" data-type="4">关闭</a>' +
@@ -83,47 +83,7 @@ UE.plugins['fiximgclick'] = (function () {
                 me.startPos.x = me.startPos.y = 0;
                 me.isDraging = false;
             },
-            _eventHandler: function (e) {
-                var me = this;
-                switch (e.type) {
-                    case 'mousedown':
-                        var hand = e.target || e.srcElement, hand;
-                        if (hand.className.indexOf('edui-editor-imagescale-hand') != -1 && me.dragId == -1) {
-                            me.dragId = hand.className.slice(-1);
-                            me.startPos.x = me.prePos.x = e.clientX;
-                            me.startPos.y = me.prePos.y = e.clientY;
-                            domUtils.on(me.doc,'mousemove', me.proxy(me._eventHandler, me));
-                        }
-                        break;
-                    case 'mousemove':
-                        if (me.dragId != -1) {
-                            me.updateContainerStyle(me.dragId, {x: e.clientX - me.prePos.x, y: e.clientY - me.prePos.y});
-                            me.prePos.x = e.clientX;
-                            me.prePos.y = e.clientY;
-                            elementUpdated = true;
-                            me.updateTargetElement();
 
-                        }
-                        break;
-                    case 'mouseup':
-                        if (me.dragId != -1) {
-                            me.updateContainerStyle(me.dragId, {x: e.clientX - me.prePos.x, y: e.clientY - me.prePos.y});
-                            me.updateTargetElement();
-                            if (me.target.parentNode) me.attachTo(me.target);
-                            me.dragId = -1;
-                        }
-                        domUtils.un(me.doc,'mousemove', me.proxy(me._eventHandler, me));
-                        //修复只是点击挪动点，但没有改变大小，不应该触发contentchange
-                        if(elementUpdated){
-                            elementUpdated = false;
-                            me.editor.fireEvent('contentchange');
-                        }
-
-                        break;
-                    default:
-                        break;
-                }
-            },
             updateTargetElement: function () {
                 var me = this;
                 domUtils.setStyles(me.target, {
@@ -180,43 +140,36 @@ UE.plugins['fiximgclick'] = (function () {
                 if(targetType){
                     me.changeTargetElement(e,targetType);
                 }
-                console.log(12333);
             },
 
             changeTargetElement:function(e, type){
                 var me = this;
                 var $target = me.target;
-                console.log(me)
                 var height = $target.height;
                 var width = $target.width;
-                //
                 switch (type){
                     case "0":
                         me.resetTargetElement($target, height, width);
                         break;
                     case "1":
-                        var wrapWidth = me.editor.offsetWidth;
-                        // if(wrapWidth <= width * 1.2 ){
-                        //     var delat = wrapWidth - width - 20;
-                        //     var x = delat;
-                        //     var y = delat / wrapWidth * height
-                        //     me.updateContainerStyle(7, {x: x, y: y});
-                        //     me.updateTargetElement();
-                        //     $("a[data-type='1']").addClass("edui-scale-disabled");
-                        //     return;
-                        // }
+                        var wrapWidth = me.editor.body.offsetWidth;
+                        if(wrapWidth <= width * 1.1 ){
+                            var delat = wrapWidth - width;
+                            var x = delat;
+                            var y = delat / wrapWidth * height
+                            me.updateContainerStyle(7, {x: x, y: y});
+                            me.updateTargetElement();
+                            return;
+                        }
                         me.updateContainerStyle(7, {x: width * 0.1 , y: height * 0.1});
                         me.updateTargetElement();
                         break;
                     case "2":
                         me.updateContainerStyle(7, {x: -width * 0.1, y: -height * 0.1});
                         me.updateTargetElement();
-                        // if($("a[data-type='1']").hasClass("edui-scale-disabled")){
-                        //     $("a[data-type='1']").removeClass("edui-scale-disabled");
-                        // }
                         break;
                     case "3":
-                        $target.remove();
+                        $target.parentNode.removeChild($target);
                         me.hide();
                         break;
                     case "4":
@@ -241,7 +194,6 @@ UE.plugins['fiximgclick'] = (function () {
                 if(targetObj) me.attachTo(targetObj);
                 window.globalValueScale = me;
 
-                // this.resizer.addEventListener('click', me.proxy(me.ScaleClick, me), false);
                 me.bind(me.resizer, "click", me.ScaleClick)
 
                 me.editor.fireEvent('afterscaleshow', me);
@@ -251,7 +203,6 @@ UE.plugins['fiximgclick'] = (function () {
                 var me = this;
                 me.resizer.style.display = 'none';
 
-                // this.resizer.removeEventListener('click', me.proxy(me.ScaleClick, me), false);
                 me.unbind(me.resizer, "click", me.ScaleClick)
                 me.editor.fireEvent('afterscalehide', me);
 
@@ -266,15 +217,7 @@ UE.plugins['fiximgclick'] = (function () {
                     target["on" + type] = func; // ie5
                 }
             },
-            /**
-             * @description 事件移除，兼容各浏览器
-             * @param target
-             * 事件触发对象
-             * @param type
-             * 事件
-             * @param func
-             * 事件处理函数
-             */
+
             unbind:function(target, type, func) {
                 if (target.removeEventListener) {
                     target.removeEventListener(type, func, false);
@@ -366,7 +309,6 @@ UE.plugins['fiximgclick'] = (function () {
                         });
                         // TODO 有iframe的情况，mousedown不能往下传。。
                         domUtils.on(imageScale.resizer, 'click', function (e) {
-                            console.log("cliiiii");
                             var ele = e.target || e.srcElement;
                             if (ele && ele.className.indexOf('edui-editor-imagescale-hand') == -1) {
                                 if(imageScale.target) me.selection.getRange().selectNode(ele).select();

@@ -119,7 +119,7 @@ UE.plugins['table'] = function () {
                 'table.noBorderTable td,table.noBorderTable th,table.noBorderTable caption{border:1px dashed #ddd !important}' +
                 //插入的表格的默认样式
                 'table{margin-bottom:10px;border-collapse:collapse;display:table;}' +
-                'td,th{padding: 5px 10px;border: 1px solid #DDD;}' +
+                'td,th{padding: 5px 10px;border: 1px solid #DDD;word-break: break-all;}' +
                 'caption{border:1px dashed #DDD;border-bottom:0;padding:3px;text-align:center;}' +
                 'th{border-top:1px solid #BBB;background-color:#F7F7F7;}' +
                 'table tr.firstRow th{border-top-width:2px;}' +
@@ -384,12 +384,14 @@ UE.plugins['table'] = function () {
         });
 
         me.addListener('afterpaste', function () {
-            utils.each(domUtils.getElementsByTagName(me.body, "table"), function (table) {
-                if (table.offsetWidth > me.body.offsetWidth) {
-                    var defaultValue = getDefaultValue(me, table);
-                    table.style.width = me.body.offsetWidth - (needIEHack ? parseInt(domUtils.getComputedStyle(me.body, 'margin-left'), 10) * 2 : 0) - defaultValue.tableBorder * 2 - (me.options.offsetWidth || 0) + 'px'
-                }
-            })
+            // utils.each(domUtils.getElementsByTagName(me.body, "table"), function (table) {
+            //     console.log(123);
+            //     if (table.offsetWidth > me.body.offsetWidth) {
+            //         console.log(321);
+            //         var defaultValue = getDefaultValue(me, table);
+            //         table.style.width = me.body.offsetWidth - (needIEHack ? parseInt(domUtils.getComputedStyle(me.body, 'margin-left'), 10) * 2 : 0) - defaultValue.tableBorder * 2 - (me.options.offsetWidth || 0) + 'px'
+            //     }
+            // })
         });
         me.addListener('blur', function () {
             tableCopyList = null;
@@ -641,22 +643,22 @@ UE.plugins['table'] = function () {
         });
         //修正全屏状态下插入的表格宽度在非全屏状态下撑开编辑器的情况
         me.addListener("fullscreenchanged", function (type, fullscreen) {
-            if (!fullscreen) {
-                var ratio = this.body.offsetWidth / document.body.offsetWidth,
-                    tables = domUtils.getElementsByTagName(this.body, "table");
-                utils.each(tables, function (table) {
-                    if (table.offsetWidth < me.body.offsetWidth) return false;
-                    var tds = domUtils.getElementsByTagName(table, "td"),
-                        backWidths = [];
-                    utils.each(tds, function (td) {
-                        backWidths.push(td.offsetWidth);
-                    });
-                    for (var i = 0, td; td = tds[i]; i++) {
-                        td.setAttribute("width", Math.floor(backWidths[i] * ratio));
-                    }
-                    table.setAttribute("width", Math.floor(getTableWidth(me, needIEHack, getDefaultValue(me))))
-                });
-            }
+            // if (!fullscreen) {
+            //     var ratio = this.body.offsetWidth / document.body.offsetWidth,
+            //         tables = domUtils.getElementsByTagName(this.body, "table");
+            //     utils.each(tables, function (table) {
+            //         if (table.offsetWidth < me.body.offsetWidth) return false;
+            //         var tds = domUtils.getElementsByTagName(table, "td"),
+            //             backWidths = [];
+            //         utils.each(tds, function (td) {
+            //             backWidths.push(td.offsetWidth);
+            //         });
+            //         for (var i = 0, td; td = tds[i]; i++) {
+            //             td.setAttribute("width", Math.floor(backWidths[i] * ratio));
+            //         }
+            //         table.setAttribute("width", Math.floor(getTableWidth(me, needIEHack, getDefaultValue(me))))
+            //     });
+            // }
         });
 
         //重写execCommand命令，用于处理框选时的处理
@@ -1117,91 +1119,91 @@ UE.plugins['table'] = function () {
 
     //双击收缩
     function tableDbclickHandler(evt) {
-        singleClickState = 0;
-        evt = evt || me.window.event;
-        var target = getParentTdOrTh(evt.target || evt.srcElement);
-        if (target) {
-            var h;
-            if (h = getRelation(target, mouseCoords(evt))) {
-
-                hideDragLine( me );
-
-                if (h == 'h1') {
-                    h = 'h';
-                    if (inTableSide(domUtils.findParentByTagName(target, "table"), target, evt)) {
-                        me.execCommand('adaptbywindow');
-                    } else {
-                        target = getUETable(target).getPreviewCell(target);
-                        if (target) {
-                            var rng = me.selection.getRange();
-                            rng.selectNodeContents(target).setCursor(true, true)
-                        }
-                    }
-                }
-                if (h == 'h') {
-                    var ut = getUETable(target),
-                        table = ut.table,
-                        cells = getCellsByMoveBorder( target, table, true );
-
-                    cells = extractArray( cells, 'left' );
-
-                    ut.width = ut.offsetWidth;
-
-                    var oldWidth = [],
-                        newWidth = [];
-
-                    utils.each( cells, function( cell ){
-
-                        oldWidth.push( cell.offsetWidth );
-
-                    } );
-
-                    utils.each( cells, function( cell ){
-
-                        cell.removeAttribute("width");
-
-                    } );
-
-                    window.setTimeout( function(){
-
-                        //是否允许改变
-                        var changeable = true;
-
-                        utils.each( cells, function( cell, index ){
-
-                            var width = cell.offsetWidth;
-
-                            if( width > oldWidth[index] ) {
-                                changeable = false;
-                                return false;
-                            }
-
-                            newWidth.push( width );
-
-                        } );
-
-                        var change = changeable ? newWidth : oldWidth;
-
-                        utils.each( cells, function( cell, index ){
-
-                            cell.width = change[index] - getTabcellSpace();
-
-                        } );
-
-
-                    }, 0 );
-
-//                    minWidth -= cellMinWidth;
+        // singleClickState = 0;
+        // evt = evt || me.window.event;
+        // var target = getParentTdOrTh(evt.target || evt.srcElement);
+//         if (target) {
+//             var h;
+//             if (h = getRelation(target, mouseCoords(evt))) {
 //
-//                    table.removeAttribute("width");
-//                    utils.each(cells, function (cell) {
-//                        cell.style.width = "";
-//                        cell.width -= minWidth;
-//                    });
-
-                }
-            }
-        }
+//                 hideDragLine( me );
+//
+//                 if (h == 'h1') {
+//                     h = 'h';
+//                     if (inTableSide(domUtils.findParentByTagName(target, "table"), target, evt)) {
+//                         me.execCommand('adaptbywindow');
+//                     } else {
+//                         target = getUETable(target).getPreviewCell(target);
+//                         if (target) {
+//                             var rng = me.selection.getRange();
+//                             rng.selectNodeContents(target).setCursor(true, true)
+//                         }
+//                     }
+//                 }
+//                 if (h == 'h') {
+//                     var ut = getUETable(target),
+//                         table = ut.table,
+//                         cells = getCellsByMoveBorder( target, table, true );
+//
+//                     cells = extractArray( cells, 'left' );
+//
+//                     ut.width = ut.offsetWidth;
+//
+//                     var oldWidth = [],
+//                         newWidth = [];
+//
+//                     utils.each( cells, function( cell ){
+//
+//                         oldWidth.push( cell.offsetWidth );
+//
+//                     } );
+//
+//                     utils.each( cells, function( cell ){
+//
+//                         cell.removeAttribute("width");
+//
+//                     } );
+//
+//                     window.setTimeout( function(){
+//
+//                         //是否允许改变
+//                         var changeable = false;
+//
+//                         utils.each( cells, function( cell, index ){
+//
+//                             var width = cell.offsetWidth;
+//
+//                             if( width > oldWidth[index] ) {
+//                                 changeable = false;
+//                                 return false;
+//                             }
+//
+//                             newWidth.push( width );
+//
+//                         } );
+//
+//                         var change = changeable ? newWidth : oldWidth;
+//
+//                         utils.each( cells, function( cell, index ){
+//                             console.log(123);
+//                             cell.width = change[index] - getTabcellSpace();
+//
+//                         } );
+//
+//
+//                     }, 0 );
+//
+// //                    minWidth -= cellMinWidth;
+// //
+// //                    table.removeAttribute("width");
+// //                    utils.each(cells, function (cell) {
+// //                        cell.style.width = "";
+// //                        cell.width -= minWidth;
+// //                    });
+//
+//                 }
+//             }
+//         }
     }
 
     function tableClickHander( evt ) {

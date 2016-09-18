@@ -322,7 +322,7 @@
 
         //tableDragable
         //表格是否可以拖拽
-        //,tableDragable: true
+        ,tableDragable: false
 
 
 
