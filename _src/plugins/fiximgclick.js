@@ -37,52 +37,45 @@ UE.plugins['fiximgclick'] = (function () {
                 me.dragId = -1;
 
                 var hands = [],
-                    cover = me.cover = document.createElement('div'),
                     resizer = me.resizer = document.createElement('div');
 
-                cover.id = me.editor.ui.id + '_imagescale_cover';
-                cover.style.cssText = 'position:absolute;display:none;z-index:' + (me.editor.options.zIndex) + ';filter:alpha(opacity=0); opacity:0;background:#CCC;';
-                domUtils.on(cover, 'mousedown click', function () {
-                    me.hide();
-                });
-
-                //for (i = 0; i < 8; i++) {
-                //    hands.push('<span class="edui-editor-imagescale-hand' + i + '"></span>');
-                //}
+                // for (i = 0; i < 8; i++) {
+                //     // hands.push('<span class="edui-editor-imagescale-hand' + i + '"></span>');
+                // }
+                //
                 hands.push('<div class="edui-scale-toolbar">' +
                     '<a href="javascript:;" class="edui-scale-item" data-type="0">原始大小</a>' +
                     '<a href="javascript:;" class="edui-scale-item" data-type="1">放大</a>' +
                     '<a href="javascript:;" class="edui-scale-item" data-type="2">缩小</a>' +
                     '<a href="javascript:;" class="edui-scale-item" data-type="3">删除</a>' +
                     '<a href="javascript:;" class="edui-scale-item" data-type="4">关闭</a>' +
-                    '</div>')
+                    '</div>' );
                 resizer.id = me.editor.ui.id + '_imagescale';
                 resizer.className = 'edui-editor-imagescale';
                 resizer.innerHTML = hands.join('');
                 resizer.style.cssText += ';display:none;border:1px solid #3b77ff;z-index:' + (me.editor.options.zIndex) + ';';
 
-                //me.editor.ui.getDom().appendChild(cover);
                 me.editor.ui.getDom().appendChild(resizer);
 
                 me.initStyle();
                 me.initEvents();
             },
             initStyle: function () {
-                utils.cssRule('imagescale', '.edui-editor-imagescale{display:none;position:absolute;border:1px solid #38B2CE;cursor:hand;-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;}'
-                + '.edui-scale-toolbar{width: 200px; height: 30px; position: absolute; top: 0; background-color: rgba(255,255,255,0.85);}'
-                + '.edui-scale-item{display: inlink-block; float: left; margin: 0 5px; font-size: 12px; line-height: 30px; color: #7eaed9; text-decoration:none;}'
-                + '.edui-scale-item:hover{color: #0a5296;}'
-                + '.edui-scale-disabled{color: #999999; cursor: default;}'
-                + '.edui-scale-disabled:hover{color: #999999; cursor: default;}');
-                    //'.edui-editor-imagescale span{position:absolute;width:6px;height:6px;overflow:hidden;font-size:0px;display:block;background-color:#3C9DD0;}');
-                    //+ '.edui-editor-imagescale .edui-editor-imagescale-hand0{cursor:nw-resize;top:0;margin-top:-4px;left:0;margin-left:-4px;}'
-                    //+ '.edui-editor-imagescale .edui-editor-imagescale-hand1{cursor:n-resize;top:0;margin-top:-4px;left:50%;margin-left:-4px;}'
-                    //+ '.edui-editor-imagescale .edui-editor-imagescale-hand2{cursor:ne-resize;top:0;margin-top:-4px;left:100%;margin-left:-3px;}'
-                    //+ '.edui-editor-imagescale .edui-editor-imagescale-hand3{cursor:w-resize;top:50%;margin-top:-4px;left:0;margin-left:-4px;}'
-                    //+ '.edui-editor-imagescale .edui-editor-imagescale-hand4{cursor:e-resize;top:50%;margin-top:-4px;left:100%;margin-left:-3px;}'
-                    //+ '.edui-editor-imagescale .edui-editor-imagescale-hand5{cursor:sw-resize;top:100%;margin-top:-3px;left:0;margin-left:-4px;}'
-                    //+ '.edui-editor-imagescale .edui-editor-imagescale-hand6{cursor:s-resize;top:100%;margin-top:-3px;left:50%;margin-left:-4px;}'
-                    //+ '.edui-editor-imagescale .edui-editor-imagescale-hand7{cursor:se-resize;top:100%;margin-top:-3px;left:100%;margin-left:-3px;}');
+                utils.cssRule('imagescale', '.edui-editor-imagescale{display:none;position:absolute;border:1px solid #38B2CE;cursor:hand;-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;}' +
+                    '.edui-editor-imagescale span{position:absolute;width:6px;height:6px;overflow:hidden;font-size:0px;display:block;background-color:#3C9DD0;}'
+                    + '.edui-editor-imagescale .edui-editor-imagescale-hand0{cursor:nw-resize;top:0;margin-top:-4px;left:0;margin-left:-4px;}'
+                    + '.edui-editor-imagescale .edui-editor-imagescale-hand1{cursor:n-resize;top:0;margin-top:-4px;left:50%;margin-left:-4px;}'
+                    + '.edui-editor-imagescale .edui-editor-imagescale-hand2{cursor:ne-resize;top:0;margin-top:-4px;left:100%;margin-left:-3px;}'
+                    + '.edui-editor-imagescale .edui-editor-imagescale-hand3{cursor:w-resize;top:50%;margin-top:-4px;left:0;margin-left:-4px;}'
+                    + '.edui-editor-imagescale .edui-editor-imagescale-hand4{cursor:e-resize;top:50%;margin-top:-4px;left:100%;margin-left:-3px;}'
+                    + '.edui-editor-imagescale .edui-editor-imagescale-hand5{cursor:sw-resize;top:100%;margin-top:-3px;left:0;margin-left:-4px;}'
+                    + '.edui-editor-imagescale .edui-editor-imagescale-hand6{cursor:s-resize;top:100%;margin-top:-3px;left:50%;margin-left:-4px;}'
+                    + '.edui-editor-imagescale .edui-editor-imagescale-hand7{cursor:se-resize;top:100%;margin-top:-3px;left:100%;margin-left:-3px;}'
+                    + '.edui-scale-toolbar{width: 200px; height: 30px; position: absolute; top: 0; background-color: rgba(255,255,255,0.85);}'
+                    + '.edui-scale-item{display: inlink-block; float: left; margin: 0 5px; font-size: 12px; line-height: 30px; color: #7eaed9; text-decoration:none;}'
+                    + '.edui-scale-item:hover{color: #0a5296;}'
+                    + '.edui-scale-disabled{color: #999999; cursor: default;}'
+                    + '.edui-scale-disabled:hover{color: #999999; cursor: default;}');
             },
             initEvents: function () {
                 var me = this;
@@ -93,19 +86,7 @@ UE.plugins['fiximgclick'] = (function () {
             _eventHandler: function (e) {
                 var me = this;
                 switch (e.type) {
-                    case 'click':
-                        e.stopPropagation();
-                        console.log(123);
-                        var hand = e.target || e.srcElement, hand;
-                        var $hand = $(hand);
-
-                        var targetType = $hand.attr("data-type");
-                        if(targetType){
-                            me.changeTargetElement(e, targetType);
-                        }
-                        break;
                     case 'mousedown':
-                        console.log(1);
                         var hand = e.target || e.srcElement, hand;
                         if (hand.className.indexOf('edui-editor-imagescale-hand') != -1 && me.dragId == -1) {
                             me.dragId = hand.className.slice(-1);
@@ -115,7 +96,6 @@ UE.plugins['fiximgclick'] = (function () {
                         }
                         break;
                     case 'mousemove':
-                        console.log(2);
                         if (me.dragId != -1) {
                             me.updateContainerStyle(me.dragId, {x: e.clientX - me.prePos.x, y: e.clientY - me.prePos.y});
                             me.prePos.x = e.clientX;
@@ -126,7 +106,6 @@ UE.plugins['fiximgclick'] = (function () {
                         }
                         break;
                     case 'mouseup':
-                        console.log(3);
                         if (me.dragId != -1) {
                             me.updateContainerStyle(me.dragId, {x: e.clientX - me.prePos.x, y: e.clientY - me.prePos.y});
                             me.updateTargetElement();
@@ -141,76 +120,9 @@ UE.plugins['fiximgclick'] = (function () {
                         }
 
                         break;
-
                     default:
                         break;
                 }
-            },
-            changeTargetElement:function(e, type){
-                var me = this;
-                var $target = me.data('$scaleTarget');
-                var height = $target.outerHeight();
-                var width = $target.outerWidth();
-
-                switch (type){
-                    case "0":
-                        me.resetTargetElement($target, height, width);
-                        break;
-                    case "1":
-                        var wrapWidth = document.width();
-                        if(wrapWidth <= width * 1.2 ){
-                            var delat = wrapWidth - width - 20;
-                            var x = delat;
-                            var y = delat / wrapWidth * height
-                            me.updateContainerStyle(7, {x: x, y: y});
-                            me.updateTargetElement();
-                            $("a[data-type='1']").addClass("edui-scale-disabled");
-                            return;
-                        }
-                        me.updateContainerStyle(7, {x: width * 0.2 , y: height * 0.2});
-                        me.updateTargetElement();
-                        break;
-                    case "2":
-                        me.updateContainerStyle(7, {x: -width * 0.2, y: -height * 0.2});
-                        me.updateTargetElement();
-                        if($("a[data-type='1']").hasClass("edui-scale-disabled")){
-                            $("a[data-type='1']").removeClass("edui-scale-disabled");
-                        }
-                        break;
-                    case "3":
-                        $target.remove();
-                        me.hide();
-                        break;
-                    case "4":
-                        me.hide();
-                        break;
-                    default:
-                        break;
-                }
-            },
-
-
-            resetTargetElement: function($target, height, width){
-                var me = this;
-                var naturalSize = me.getTargetNaturalSize($target);
-
-                me.updateContainerStyle(7, {x: naturalSize[0] - width, y: naturalSize[1] - height});
-                me.updateTargetElement();
-            },
-
-
-            //获取图片原始大小;
-            getTargetNaturalSize: function(img) {
-                var nWidth, nHeight
-                if (img.naturalWidth) { // 现代浏览器
-                    nWidth = img.naturalWidth
-                    nHeight = img.naturalHeight
-                } else { // IE6/7/8
-                    var image = new Image();
-                    image.src = img.attr("src");
-                    return [image.width, image.height];
-                }
-                return [nWidth, nHeight];
             },
             updateTargetElement: function () {
                 var me = this;
@@ -259,48 +171,120 @@ UE.plugins['fiximgclick'] = (function () {
                         return value <= 0 ? 1 : (value + ele.offsetTop) > wrap.clientHeight ? wrap.clientHeight - ele.offsetTop : value;
                 }
             },
-            hideCover: function () {
-                this.cover.style.display = 'none';
-            },
-            showCover: function () {
-                var me = this,
-                    editorPos = domUtils.getXY(me.editor.ui.getDom()),
-                    iframePos = domUtils.getXY(me.editor.iframe);
 
-                domUtils.setStyles(me.cover, {
-                    'width': me.editor.iframe.offsetWidth + 'px',
-                    'height': me.editor.iframe.offsetHeight + 'px',
-                    'top': iframePos.y - editorPos.y + 'px',
-                    'left': iframePos.x - editorPos.x + 'px',
-                    'position': 'absolute',
-                    'display': ''
-                })
+            ScaleClick: function(e){
+                var me = window.globalValueScale;
+                e.stopPropagation();
+                var hand = e.target || e.srcElement, hand;
+                var targetType = hand.getAttribute("data-type");
+                if(targetType){
+                    me.changeTargetElement(e,targetType);
+                }
+                console.log(12333);
             },
+
+            changeTargetElement:function(e, type){
+                var me = this;
+                var $target = me.target;
+                console.log(me)
+                var height = $target.height;
+                var width = $target.width;
+                //
+                switch (type){
+                    case "0":
+                        me.resetTargetElement($target, height, width);
+                        break;
+                    case "1":
+                        var wrapWidth = me.editor.offsetWidth;
+                        // if(wrapWidth <= width * 1.2 ){
+                        //     var delat = wrapWidth - width - 20;
+                        //     var x = delat;
+                        //     var y = delat / wrapWidth * height
+                        //     me.updateContainerStyle(7, {x: x, y: y});
+                        //     me.updateTargetElement();
+                        //     $("a[data-type='1']").addClass("edui-scale-disabled");
+                        //     return;
+                        // }
+                        me.updateContainerStyle(7, {x: width * 0.1 , y: height * 0.1});
+                        me.updateTargetElement();
+                        break;
+                    case "2":
+                        me.updateContainerStyle(7, {x: -width * 0.1, y: -height * 0.1});
+                        me.updateTargetElement();
+                        // if($("a[data-type='1']").hasClass("edui-scale-disabled")){
+                        //     $("a[data-type='1']").removeClass("edui-scale-disabled");
+                        // }
+                        break;
+                    case "3":
+                        $target.remove();
+                        me.hide();
+                        break;
+                    case "4":
+                        me.hide();
+                        break;
+                    default:
+                        break;
+                }
+            },
+
+            resetTargetElement: function($target, height, width){
+                var me = this;
+                var naturalSize = [me.target.naturalWidth, me.target.naturalHeight];
+
+                me.updateContainerStyle(7, {x: naturalSize[0] - width, y: naturalSize[1] - height});
+                me.updateTargetElement();
+            },
+
             show: function (targetObj) {
                 var me = this;
                 me.resizer.style.display = 'block';
                 if(targetObj) me.attachTo(targetObj);
-                domUtils.on(me.resizer, 'click', me.proxy(me._eventHandler, me));
-                console.log(me)
-                console.log(me.resizer);
+                window.globalValueScale = me;
 
-                domUtils.on(this.resizer, 'mousedown', me.proxy(me._eventHandler, me));
-                domUtils.on(me.doc, 'mouseup', me.proxy(me._eventHandler, me));
+                // this.resizer.addEventListener('click', me.proxy(me.ScaleClick, me), false);
+                me.bind(me.resizer, "click", me.ScaleClick)
 
-                //me.showCover();
                 me.editor.fireEvent('afterscaleshow', me);
                 me.editor.fireEvent('saveScene');
             },
             hide: function () {
                 var me = this;
-                //me.hideCover();
                 me.resizer.style.display = 'none';
 
-                domUtils.un(me.resizer, 'mousedown', me.proxy(me._eventHandler, me));
-                domUtils.un(me.doc, 'mouseup', me.proxy(me._eventHandler, me));
-                domUtils.un(this.resizer, 'click', me.proxy(me._eventHandler, me));
+                // this.resizer.removeEventListener('click', me.proxy(me.ScaleClick, me), false);
+                me.unbind(me.resizer, "click", me.ScaleClick)
                 me.editor.fireEvent('afterscalehide', me);
+
             },
+
+            bind: function(target, type, func) {
+                if (target.addEventListener) {// 非ie 和ie9
+                    target.addEventListener(type, func, false);
+                } else if (target.attachEvent) { // ie6到ie8
+                    target.attachEvent("on" + type, func);
+                } else {
+                    target["on" + type] = func; // ie5
+                }
+            },
+            /**
+             * @description 事件移除，兼容各浏览器
+             * @param target
+             * 事件触发对象
+             * @param type
+             * 事件
+             * @param func
+             * 事件处理函数
+             */
+            unbind:function(target, type, func) {
+                if (target.removeEventListener) {
+                    target.removeEventListener(type, func, false);
+                } else if (target.detachEvent) {
+                    target.detachEvent("on" + type, func);
+                } else {
+                    target["on" + type] = null;
+                }
+            },
+
             proxy: function( fn, context ) {
                 return function(e) {
                     return fn.apply( context || this, arguments);
@@ -334,18 +318,19 @@ UE.plugins['fiximgclick'] = (function () {
             me.addListener('click', function (type, e) {
 
                 var range = me.selection.getRange(),
-                    img = range.getClosedNode();
+                    img = range.getClosedNode(),
+                    target = e.target;
 
-                if (img && img.tagName == 'IMG' && me.body.contentEditable!="false") {
+                if (img && img.tagName == 'IMG' && e.target.tagName == 'IMG' && me.body.contentEditable!="false") {
 
                     if (img.className.indexOf("edui-faked-music") != -1 ||
                         img.getAttribute("anchorname") ||
                         domUtils.hasClass(img, 'loadingclass') ||
                         domUtils.hasClass(img, 'loaderrorclass')) { return }
-
                     if (!imageScale) {
                         imageScale = new Scale();
                         imageScale.init(me);
+
                         me.ui.getDom().appendChild(imageScale.resizer);
 
                         var _keyDownHandler = function (e) {
@@ -353,45 +338,41 @@ UE.plugins['fiximgclick'] = (function () {
                             if(imageScale.target) me.selection.getRange().selectNode(imageScale.target).select();
                         }, _mouseDownHandler = function (e) {
                             var ele = e.target || e.srcElement;
+
                             if (ele && (ele.className===undefined || ele.className.indexOf('edui-editor-imagescale') == -1)) {
                                 _keyDownHandler(e);
                             }
-                        }, timer;
-
+                        };
+                        me.removeListener('afterscaleshow');
+                        me.removeListener('afterscalehide');
                         me.addListener('afterscaleshow', function (e) {
                             me.addListener('beforekeydown', _keyDownHandler);
                             me.addListener('beforemousedown', _mouseDownHandler);
                             domUtils.on(document, 'keydown', _keyDownHandler);
-                            domUtils.on(document,'mousedown', _mouseDownHandler);
-                            me.selection.getNative().removeAllRanges();
+                            domUtils.on(document,'click', _mouseDownHandler);
+                            if(!browser.ie9below){
+                                me.selection.getNative().removeAllRanges();
+                            }else{
+                                document.selection.empty();
+                            }
+
                         });
                         me.addListener('afterscalehide', function (e) {
                             me.removeListener('beforekeydown', _keyDownHandler);
                             me.removeListener('beforemousedown', _mouseDownHandler);
                             domUtils.un(document, 'keydown', _keyDownHandler);
-                            domUtils.un(document,'mousedown', _mouseDownHandler);
-                            var target = imageScale.target;
-                            //if (target.parentNode) {
-                            //    me.selection.getRange().selectNode(target).select();
-                            //}
+                            domUtils.un(document,'click', _mouseDownHandler);
+
                         });
-                        //TODO 有iframe的情况，mousedown不能往下传。。
-                        domUtils.on(imageScale.resizer, 'mousedown', function (e) {
-                            me.selection.getNative().removeAllRanges();
+                        // TODO 有iframe的情况，mousedown不能往下传。。
+                        domUtils.on(imageScale.resizer, 'click', function (e) {
+                            console.log("cliiiii");
                             var ele = e.target || e.srcElement;
                             if (ele && ele.className.indexOf('edui-editor-imagescale-hand') == -1) {
-                                timer = setTimeout(function () {
-                                    imageScale.hide();
-                                    if(imageScale.target) me.selection.getRange().selectNode(ele).select();
-                                }, 200);
+                                if(imageScale.target) me.selection.getRange().selectNode(ele).select();
                             }
                         });
-                        domUtils.on(imageScale.resizer, 'mouseup', function (e) {
-                            var ele = e.target || e.srcElement;
-                            if (ele && ele.className.indexOf('edui-editor-imagescale-hand') == -1) {
-                                clearTimeout(timer);
-                            }
-                        });
+
                     }
                     imageScale.show(img);
                 } else {
