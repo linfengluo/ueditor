@@ -232,10 +232,10 @@ UE.plugins['table'] = function () {
                 }
             }
         });
-        me.addListener("tablehasdeleted",function(){
-            toggleDraggableState(this, false, "", null);
-            if (dragButton)domUtils.remove(dragButton);
-        });
+        // me.addListener("tablehasdeleted",function(){
+        //     toggleDraggableState(this, false, "", null);
+        //     if (dragButton)domUtils.remove(dragButton);
+        // });
 
         me.addListener('beforepaste', function (cmd, html) {
             var me = this;
@@ -411,9 +411,9 @@ UE.plugins['table'] = function () {
 
             }, 100);
         });
-        me.addListener("selectionchange", function () {
-            toggleDraggableState(me, false, "", null);
-        });
+        // me.addListener("selectionchange", function () {
+        //     toggleDraggableState(me, false, "", null);
+        // });
 
 
         //内容变化时触发索引更新
@@ -452,14 +452,14 @@ UE.plugins['table'] = function () {
                 };
                 table.onmousemove = function () {
                     me.fireEvent('tablemousemove', table);
-                    me.options.tableDragable && toggleDragButton(true, this, me);
+                    // me.options.tableDragable && toggleDragButton(true, this, me);
                     utils.defer(function(){
                         me.fireEvent('contentchange',50)
                     },true)
                 };
                 table.onmouseout = function () {
-                    me.fireEvent('tablemouseout', table);
-                    toggleDraggableState(me, false, "", null);
+                    // me.fireEvent('tablemouseout', table);
+                    // toggleDraggableState(me, false, "", null);
                     hideDragLine(me);
                 };
                 table.onclick = function (evt) {
@@ -525,12 +525,12 @@ UE.plugins['table'] = function () {
 
         domUtils.on(me.document, "mousemove", mouseMoveEvent);
 
-        domUtils.on(me.document, "mouseout", function (evt) {
-            var target = evt.target || evt.srcElement;
-            if (target.tagName == "TABLE") {
-                toggleDraggableState(me, false, "", null);
-            }
-        });
+        // domUtils.on(me.document, "mouseout", function (evt) {
+        //     var target = evt.target || evt.srcElement;
+        //     if (target.tagName == "TABLE") {
+        //         toggleDraggableState(me, false, "", null);
+        //     }
+        // });
         /**
          * 表格隔行变色
          */
@@ -610,9 +610,9 @@ UE.plugins['table'] = function () {
             }
 
         });
-        browser.ie && me.addListener('selectionchange', function () {
-            toggleDraggableState(this, false, "", null);
-        });
+        // browser.ie && me.addListener('selectionchange', function () {
+        //     toggleDraggableState(this, false, "", null);
+        // });
         me.addListener("keydown", function (type, evt) {
             var me = this;
             //处理在表格的最后一个输入tab产生新的表格
@@ -794,7 +794,7 @@ UE.plugins['table'] = function () {
                 me.body.style.webkitUserSelect = 'none';
                 me.selection.getNative()[browser.ie9below ? 'empty' : 'removeAllRanges']();
                 pos = mouseCoords(evt);
-                toggleDraggableState(me, true, onDrag, pos, target);
+                // toggleDraggableState(me, true, onDrag, pos, target);
                 if (onDrag == "h") {
                     dragLine.style.left = getPermissionX(dragTd, evt) + "px";
                 } else if (onDrag == "v") {
@@ -825,7 +825,7 @@ UE.plugins['table'] = function () {
                         target = getUETable(target).getPreviewCell(target, state == "v");
                     }
                     //位于第一行的顶部或者第一列的左边时不可拖动
-                    toggleDraggableState(me, target ? !!state : false, target ? state : '', pos, target);
+                    // toggleDraggableState(me, target ? !!state : false, target ? state : '', pos, target);
 
                 }
             } else {
