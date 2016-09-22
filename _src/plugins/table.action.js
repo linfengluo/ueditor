@@ -1484,7 +1484,7 @@ UE.plugins['table'] = function () {
                 cells = getCellsByMoveBorder( cell, table );
 
             table.style.width = "";
-            table.removeAttribute("width");
+            //table.removeAttribute("width");
 
             //修正改变量
             changeValue = correctChangeValue( changeValue, cell, cells );
