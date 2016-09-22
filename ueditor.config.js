@@ -34,17 +34,11 @@
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
         , toolbars: [[
-            'fullscreen', 'source', '|', 'undo', 'redo', '|',
-            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-            'directionalityltr', 'directionalityrtl', 'indent', '|',
-            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-            'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
-            'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
-            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-            'print', 'preview', 'searchreplace', 'drafts', 'help'
+            'attachment','bold', 'italic', 'underline','fontfamily', 'fontsize', 'forecolor', 'backcolor', '|',
+            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+            'insertorderedlist', 'insertunorderedlist',
+            'simpleupload', 'emotion','inserttable','pasteplain',
+            'link', 'unlink', 'selectall', 'source', 'fullscreen'
         ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
@@ -58,7 +52,7 @@
 
         //主题配置项,默认是default。有需要的话也可以使用如下这样的方式来自动多主题切换，当然，前提条件是themes文件夹下存在对应的主题文件：
         //现有如下皮肤:default
-        //,theme:'default'
+        //,theme:'189'
         //,themePath:URL +"themes/"
 
         //,zIndex : 900     //编辑器层级的基数,默认是900
@@ -97,7 +91,7 @@
         //,autoClearEmptyNode : true //getContent时，是否删除空的inlineElement节点（包括嵌套的情况）
 
         //启用自动保存
-        //,enableAutoSave: true
+        ,enableAutoSave: false
         //自动保存间隔时间， 单位ms
         //,saveInterval: 500
 
@@ -144,31 +138,31 @@
 
         //insertorderedlist
         //有序列表的下拉配置,值留空时支持多语言自动识别，若配置值，则以此值为准
-        //,'insertorderedlist':{
-        //      //自定的样式
-        //        'num':'1,2,3...',
-        //        'num1':'1),2),3)...',
-        //        'num2':'(1),(2),(3)...',
-        //        'cn':'一,二,三....',
-        //        'cn1':'一),二),三)....',
-        //        'cn2':'(一),(二),(三)....',
-        //     //系统自带
-        //     'decimal' : '' ,         //'1,2,3...'
-        //     'lower-alpha' : '' ,    // 'a,b,c...'
-        //     'lower-roman' : '' ,    //'i,ii,iii...'
-        //     'upper-alpha' : '' , lang   //'A,B,C'
-        //     'upper-roman' : ''      //'I,II,III...'
-        //}
+        ,'insertorderedlist':{
+              //自定的样式
+              //  'num':'1,2,3...',
+              //  'num1':'1),2),3)...',
+              //  'num2':'(1),(2),(3)...',
+              //  'cn':'一,二,三....',
+              //  'cn1':'一),二),三)....',
+              //  'cn2':'(一),(二),(三)....',
+             //系统自带
+             'decimal' : '' ,         //'1,2,3...'
+             'lower-alpha' : '' ,    // 'a,b,c...'
+             'lower-roman' : '' ,    //'i,ii,iii...'
+             'upper-alpha' : '' ,   //'A,B,C'
+             'upper-roman' : ''      //'I,II,III...'
+        }
 
         //insertunorderedlist
         //无序列表的下拉配置，值留空时支持多语言自动识别，若配置值，则以此值为准
-        //,insertunorderedlist : { //自定的样式
-        //    'dash' :'— 破折号', //-破折号
-        //    'dot':' 。 小圆圈', //系统自带
-        //    'circle' : '',  // '○ 小圆圈'
-        //    'disc' : '',    // '● 小圆点'
-        //    'square' : ''   //'■ 小方块'
-        //}
+        ,insertunorderedlist : { //自定的样式
+            //'dash' :'— 破折号', //-破折号
+            //'dot':' 。 小圆圈', //系统自带
+            'circle' : '',  // '○ 小圆圈'
+            'disc' : '',    // '● 小圆点'
+            'square' : ''   //'■ 小方块'
+        }
         //,listDefaultPaddingLeft : '30'//默认的左边缩进的基数倍
         //,listiconpath : 'http://bs.baidu.com/listicon/'//自定义标号的路径
         //,maxListLevel : 3 //限制可以tab的级数, 设置-1为不限制
@@ -228,7 +222,7 @@
         //]
 
         //打开右键菜单功能
-        //,enableContextMenu: true
+        ,enableContextMenu: false
         //右键菜单的内容，可以参考plugins/contextmenu.js里边的默认菜单的例子，label留空支持国际化，否则以此配置为准
         //,contextMenu:[
         //    {
@@ -247,11 +241,11 @@
 
         //elementPathEnabled
         //是否启用元素路径，默认是显示
-        //,elementPathEnabled : true
+        ,elementPathEnabled : false
 
         //wordCount
-        //,wordCount:true          //是否开启字数统计
-        //,maximumWords:10000       //允许的最大字符数
+        ,wordCount:false         //是否开启字数统计
+        ,maximumWords:1000000       //允许的最大字符数
         //字数统计提示，{#count}代表当前字数，{#leave}代表还可以输入多少字符数,留空支持多语言自动切换，否则按此配置显示
         //,wordCountMsg:''   //当前已输入 {#count} 个字符，您还可以输入{#leave} 个字符
         //超出字数限制提示  留空支持多语言自动切换，否则按此配置显示

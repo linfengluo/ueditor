@@ -60,7 +60,7 @@
 
 .edui-default .edui-toolbar .edui-splitbutton .edui-state-opened .edui-splitbutton-body,
 .edui-default .edui-toolbar .edui-menubutton .edui-state-opened .edui-menubutton-body {
-    background-color: white;
+    background: none;
     border: 1px solid gray;
     padding: 0;
 }

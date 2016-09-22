@@ -406,13 +406,16 @@
                     value:val,
                     theme:editor.options.theme,
                     renderLabelHtml:function () {
-                        return '<div class="edui-label %%-label" style="font-family:' +
+                        return '<div class="edui-label edui-listitem-label edui-default" style="font-family:' +
                             utils.unhtml(this.value) + '">' + (this.label || '') + '</div>';
+                    },
+                    onclick: function(){
+                        editor.execCommand('FontFamily', this.value);
                     }
                 });
             })(ci.label || langLabel, ci.val)
         }
-        var ui = new editorui.Combox({
+        var ui = new editorui.MenuButton({
             editor:editor,
             items:items,
             onselect:function (t, index) {
@@ -444,10 +447,8 @@
                 } else {
                     ui.setDisabled(false);
                     var value = editor.queryCommandValue('FontFamily');
-                    //trace:1871 ie下从源码模式切换回来时，字体会带单引号，而且会有逗号
-                    value && (value = value.replace(/['"]/g, '').split(',')[0]);
+                    value && (value = value.replace(/['"]/g, ''));
                     ui.setValue(value);
-
                 }
             }
 
@@ -456,9 +457,9 @@
     };
 
     editorui.fontsize = function (editor, list, title) {
-        title = editor.options.labelMap['fontsize'] || editor.getLang("labelMap.fontsize") || '';
+
         list = list || editor.options['fontsize'] || [];
-        if (!list.length) return;
+        if (!list.length)return;
         var items = [];
         for (var i = 0; i < list.length; i++) {
             var size = list[i] + 'px';
@@ -467,23 +468,26 @@
                 value:size,
                 theme:editor.options.theme,
                 renderLabelHtml:function () {
-                    return '<div class="edui-label %%-label" style="line-height:1;font-size:' +
-                        this.value + '">' + (this.label || '') + '</div>';
+                    return'<div class="edui-arrow edui-default"></div>' +
+                        '<div class="edui-box edui-label edui-menuitem-label edui-default" style="font-size: '+ this.value +';">'+ this.label +'</div>';
+                },
+                onclick:function () {
+                    editor.execCommand('FontSize', this.value);
                 }
             });
         }
-        var ui = new editorui.Combox({
+
+        var ui = new editorui.MenuButton({
             editor:editor,
+            className:'edui-for-fontsize',
+            title:editor.options.labelMap['fontsize'] || editor.getLang("labelMap.fontsize") || '',
             items:items,
-            title:title,
-            initValue:title,
-            onselect:function (t, index) {
-                editor.execCommand('FontSize', this.items[index].value);
-            },
             onbuttonclick:function () {
                 this.showPopup();
             },
-            className:'edui-for-fontsize'
+            onselect:function (t, index) {
+                editor.execCommand('FontSize', this.items[index].value);
+            },
         });
         editorui.buttons['fontsize'] = ui;
         editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
@@ -499,24 +503,78 @@
 
         });
         return ui;
+
+
+
+        //title = editor.options.labelMap['fontsize'] || editor.getLang("labelMap.fontsize") || '';
+        //list = list || editor.options['fontsize'] || [];
+        //if (!list.length) return;
+        //var items = [];
+        //for (var i = 0; i < list.length; i++) {
+        //    var size = list[i] + 'px';
+        //    items.push({
+        //        label:size,
+        //        value:size,
+        //        theme:editor.options.theme,
+        //        renderLabelHtml:function () {
+        //            return '<div class="edui-label %%-label" style="line-height:1;font-size:' +
+        //                this.value + '">' + (this.label || '') + '</div>';
+        //        }
+        //    });
+        //}
+        //var ui = new editorui.Combox({
+        //    editor:editor,
+        //    items:items,
+        //    title:title,
+        //    initValue:title,
+        //    onselect:function (t, index) {
+        //        editor.execCommand('FontSize', this.items[index].value);
+        //    },
+        //    onbuttonclick:function () {
+        //        this.showPopup();
+        //    },
+        //    className:'edui-for-fontsize'
+        //});
+        //editorui.buttons['fontsize'] = ui;
+        //editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
+        //    if (!uiReady) {
+        //        var state = editor.queryCommandState('FontSize');
+        //        if (state == -1) {
+        //            ui.setDisabled(true);
+        //        } else {
+        //            ui.setDisabled(false);
+        //            //ui.setValue(editor.queryCommandValue('FontSize'));
+        //        }
+        //    }
+        //
+        //});
+        //return ui;
     };
 
     editorui.paragraph = function (editor, list, title) {
         title = editor.options.labelMap['paragraph'] || editor.getLang("labelMap.paragraph") || '';
         list = editor.options['paragraph'] || [];
-        if (utils.isEmptyObject(list)) return;
+
+        if (utils.isEmptyObject(list))return;
         var items = [];
         for (var i in list) {
             items.push({
-                value:i,
                 label:list[i] || editor.getLang("paragraph")[i],
+                value:i,
                 theme:editor.options.theme,
                 renderLabelHtml:function () {
-                    return '<div class="edui-label %%-label"><span class="edui-for-' + this.value + '">' + (this.label || '') + '</span></div>';
+                    return '<div class="edui-label edui-listitem-label edui-default">' +
+                        '<span class="edui-for-' + this.value + '">' + (this.label || '') + '</span>' +
+                        '</div>';
+
+                },
+                onclick:function () {
+                    editor.execCommand('Paragraph', this.value);
                 }
-            })
+            });
         }
-        var ui = new editorui.Combox({
+
+        var ui = new editorui.MenuButton({
             editor:editor,
             items:items,
             title:title,
@@ -530,6 +588,15 @@
             }
         });
         editorui.buttons['paragraph'] = ui;
+        var indexValue = {
+            "p": 0,
+            "h1": 1,
+            "h2": 2,
+            "h3": 3,
+            "h4": 4,
+            "h5": 5,
+            "h6": 6
+        }
         editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
             if (!uiReady) {
                 var state = editor.queryCommandState('Paragraph');
@@ -538,7 +605,7 @@
                 } else {
                     ui.setDisabled(false);
                     var value = editor.queryCommandValue('Paragraph');
-                    var index = ui.indexByValue(value);
+                    var index = indexValue[value];
                     if (index != -1) {
                         ui.setValue(value);
                     } else {
@@ -548,6 +615,57 @@
             }
 
         });
+
+        //title = editor.options.labelMap['paragraph'] || editor.getLang("labelMap.paragraph") || '';
+        //list = editor.options['paragraph'] || [];
+        //if (utils.isEmptyObject(list)) return;
+        //var items = [];
+        //for (var i in list) {
+        //    items.push({
+        //        value:i,
+        //        label:list[i] || editor.getLang("paragraph")[i],
+        //        theme:editor.options.theme,
+        //        renderLabelHtml:function () {
+        //            return '<div class="edui-label %%-label"><span class="edui-for-' + this.value + '">' + (this.label || '') + '</span></div>';
+        //        }
+        //    })
+        //}
+        //var ui = new editorui.Combox({
+        //    editor:editor,
+        //    items:items,
+        //    title:title,
+        //    initValue:title,
+        //    className:'edui-for-paragraph',
+        //    onselect:function (t, index) {
+        //        editor.execCommand('Paragraph', this.items[index].value);
+        //    },
+        //    onbuttonclick:function () {
+        //        this.showPopup();
+        //    }
+        //});
+        //editorui.buttons['paragraph'] = ui;
+        //
+        //editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
+        //    if (!uiReady) {
+        //        var state = editor.queryCommandState('Paragraph');
+        //        if (state == -1) {
+        //            ui.setDisabled(true);
+        //        } else {
+        //            ui.setDisabled(false);
+        //            var value = editor.queryCommandValue('Paragraph');
+        //            console.log(value)
+        //            var index = ui.indexByValue(value);
+        //            console.log(index);
+        //
+        //            if (index != -1) {
+        //                ui.setValue(value);
+        //            } else {
+        //                ui.setValue(ui.initValue);
+        //            }
+        //        }
+        //    }
+        //
+        //});
         return ui;
     };
 

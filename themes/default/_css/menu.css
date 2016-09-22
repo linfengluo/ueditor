@@ -10,7 +10,7 @@
 .edui-default .edui-menu-body {
     _width: 150px;
     min-width: 170px;
-    background: url("../images/sparator_v.png") repeat-y 25px;
+    /*background: url("../images/sparator_v.png") repeat-y 25px;*/
 }
 
 .edui-default .edui-menuitem-body {
@@ -22,11 +22,24 @@
     vertical-align: top;
 }
 
+.edui-for-fontsize .edui-default .edui-menuitem,
+.edui-for-paragraph .edui-default .edui-menuitem{
+    height: inherit;
+    cursor: default;
+    vertical-align: middle;
+}
+
+.edui-for-fontfamily .edui-default .edui-menuitem{
+    height: 20px;
+    cursor: default;
+    vertical-align: middle;
+}
+
 .edui-default .edui-menuitem .edui-icon {
-    width: 20px !important;
-    height: 20px !important;
-    background: url(../images/icons.png) 0 -4000px;
-    background: url(../images/icons.gif) 0 -4000px\9;
+    /*width: 20px !important;*/
+    /*height: 20px !important;*/
+    /*background: url(../images/icons.png) 0 -4000px;*/
+    /*background: url(../images/icons.gif) 0 -4000px\9;*/
 }
 
 .edui-default .edui-menuitem .edui-label {
@@ -35,9 +48,29 @@
     height: 20px;
     padding-left: 10px;
 }
+.edui-for-fontsize .edui-default .edui-menuitem .edui-label,
+.edui-for-paragraph .edui-default .edui-menuitem .edui-label{
+    font-size: 12px;
+    line-height: normal;
+    height: inherit;
+    padding-left: 10px;
+}
+
+.edui-for-fontfamily .edui-default .edui-menuitem .edui-label{
+    font-size: 12px;
+    line-height: 20px;
+    height: 20px;
+    padding-left: 10px;
+}
 
 .edui-default .edui-state-checked .edui-menuitem-body {
-    background: url("../images/icons-all.gif") no-repeat 6px -205px;
+    background-color: #4f96f2;
+}
+
+.edui-for-fontsize .edui-default .edui-state-checked .edui-menuitem-body,
+.edui-for-paragraph .edui-default .edui-state-checked .edui-menuitem-body,
+.edui-for-fontfamily .edui-default .edui-state-checked .edui-menuitem-body{
+    background-color: #4f96f2;
 }
 
 .edui-default .edui-state-disabled .edui-menuitem-label {

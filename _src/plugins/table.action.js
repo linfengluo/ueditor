@@ -1486,6 +1486,7 @@ UE.plugins['table'] = function () {
             table.style.width = "";
             // table.removeAttribute("width");
 
+
             //修正改变量
             changeValue = correctChangeValue( changeValue, cell, cells );
 
