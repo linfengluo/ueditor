@@ -61,7 +61,7 @@
     var btnCmds = ['undo', 'redo', 'formatmatch',
         'bold', 'italic', 'underline', 'fontborder', 'touppercase', 'tolowercase',
         'strikethrough', 'subscript', 'superscript', 'source', 'indent', 'outdent',
-        'blockquote', 'pasteplain', 'pagebreak',
+        'blockquote', 'pasteplain', 'pagebreak','justifymenu','addindent','reduceindent',
         'selectall', 'print','horizontal', 'removeformat', 'time', 'date', 'unlink',
         'insertparagraphbeforetable', 'insertrow', 'insertcol', 'mergeright', 'mergedown', 'deleterow',
         'deletecol', 'splittorows', 'splittocols', 'splittocells', 'mergecells', 'deletetable', 'drafts'];
@@ -456,6 +456,7 @@
         return ui;
     };
 
+
     editorui.fontsize = function (editor, list, title) {
 
         list = list || editor.options['fontsize'] || [];
@@ -504,51 +505,6 @@
         });
         return ui;
 
-
-
-        //title = editor.options.labelMap['fontsize'] || editor.getLang("labelMap.fontsize") || '';
-        //list = list || editor.options['fontsize'] || [];
-        //if (!list.length) return;
-        //var items = [];
-        //for (var i = 0; i < list.length; i++) {
-        //    var size = list[i] + 'px';
-        //    items.push({
-        //        label:size,
-        //        value:size,
-        //        theme:editor.options.theme,
-        //        renderLabelHtml:function () {
-        //            return '<div class="edui-label %%-label" style="line-height:1;font-size:' +
-        //                this.value + '">' + (this.label || '') + '</div>';
-        //        }
-        //    });
-        //}
-        //var ui = new editorui.Combox({
-        //    editor:editor,
-        //    items:items,
-        //    title:title,
-        //    initValue:title,
-        //    onselect:function (t, index) {
-        //        editor.execCommand('FontSize', this.items[index].value);
-        //    },
-        //    onbuttonclick:function () {
-        //        this.showPopup();
-        //    },
-        //    className:'edui-for-fontsize'
-        //});
-        //editorui.buttons['fontsize'] = ui;
-        //editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
-        //    if (!uiReady) {
-        //        var state = editor.queryCommandState('FontSize');
-        //        if (state == -1) {
-        //            ui.setDisabled(true);
-        //        } else {
-        //            ui.setDisabled(false);
-        //            //ui.setValue(editor.queryCommandValue('FontSize'));
-        //        }
-        //    }
-        //
-        //});
-        //return ui;
     };
 
     editorui.paragraph = function (editor, list, title) {
@@ -616,59 +572,8 @@
 
         });
 
-        //title = editor.options.labelMap['paragraph'] || editor.getLang("labelMap.paragraph") || '';
-        //list = editor.options['paragraph'] || [];
-        //if (utils.isEmptyObject(list)) return;
-        //var items = [];
-        //for (var i in list) {
-        //    items.push({
-        //        value:i,
-        //        label:list[i] || editor.getLang("paragraph")[i],
-        //        theme:editor.options.theme,
-        //        renderLabelHtml:function () {
-        //            return '<div class="edui-label %%-label"><span class="edui-for-' + this.value + '">' + (this.label || '') + '</span></div>';
-        //        }
-        //    })
-        //}
-        //var ui = new editorui.Combox({
-        //    editor:editor,
-        //    items:items,
-        //    title:title,
-        //    initValue:title,
-        //    className:'edui-for-paragraph',
-        //    onselect:function (t, index) {
-        //        editor.execCommand('Paragraph', this.items[index].value);
-        //    },
-        //    onbuttonclick:function () {
-        //        this.showPopup();
-        //    }
-        //});
-        //editorui.buttons['paragraph'] = ui;
-        //
-        //editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
-        //    if (!uiReady) {
-        //        var state = editor.queryCommandState('Paragraph');
-        //        if (state == -1) {
-        //            ui.setDisabled(true);
-        //        } else {
-        //            ui.setDisabled(false);
-        //            var value = editor.queryCommandValue('Paragraph');
-        //            console.log(value)
-        //            var index = ui.indexByValue(value);
-        //            console.log(index);
-        //
-        //            if (index != -1) {
-        //                ui.setValue(value);
-        //            } else {
-        //                ui.setValue(ui.initValue);
-        //            }
-        //        }
-        //    }
-        //
-        //});
         return ui;
     };
-
 
     //自定义标题
     editorui.customstyle = function (editor) {
@@ -968,5 +873,109 @@
         });
         return ui;
     };
+
+
+    //对齐下拉框
+    editorui["justifymenu"] = function (editor) {
+        var cmd = "justifymenu";
+        var items = [];
+        var lists = [{
+                label:'左对齐',
+                cmdName:'justify',
+                value:'left'
+            }, {
+                label:'居中',
+                cmdName:'justify',
+                value:'center'
+            }, {
+                label:'右对齐',
+                cmdName:'justify',
+                value:'right'
+            }, {
+                label:'两端对齐',
+                cmdName:'justify',
+                value:'justify'
+            }];
+
+        for(var i = 0; i < lists.length; i++){
+            items.push({
+                //显示的条目
+                label:lists[i].label,
+                //选中条目后的返回值
+                value:lists[i].value,
+                //针对每个条目进行特殊的渲染
+                renderLabelHtml:function () {
+                    //这个是希望每个条目的字体是不同的
+                    return '<div class="edui-label edui-listitem-label edui-default">' +
+                        '<span class="edui-for-justifyMenuItem">' + (this.label || '') + '</span>' +
+                        '</div>';
+                },
+                onclick:function () {
+                    editor.execCommand('justify', this.value);
+                },
+            });
+        }
+        //创建下来框
+        var ui = new UE.ui.MenuButton({
+            //需要指定当前的编辑器实例
+            editor:editor,
+            //添加条目
+            items:items,
+            //当选中时要做的事情
+            onselect:function (t, index) {
+                //拿到选中条目的值
+                editor.execCommand('justify', this.items[index].value);
+            },
+            //提示
+            title:'对齐',
+            //当编辑器没有焦点时，combox默认显示的内容
+            onbuttonclick:function () {
+                this.showPopup();
+            }
+        });
+
+        editorui.buttons[cmd] = ui;
+        editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
+            if (!uiReady) {
+                var state = editor.queryCommandState('justify');
+                if (state == -1) {
+                    ui.setDisabled(true);
+                } else {
+                    ui.setDisabled(false);
+                    ui.setValue(editor.queryCommandValue('justify'));
+                }
+            }
+        });
+        return ui;
+    };
+
+    //editorui["addindent"] = function (editor) {
+    //
+    //    //创建下来框
+    //    var ui = new UE.ui.MenuButton({
+    //        //需要指定当前的编辑器实例
+    //        editor:editor,
+    //        //提示
+    //        title:'增加缩颈',
+    //        //当编辑器没有焦点时，combox默认显示的内容
+    //        onbuttonclick:function () {
+    //            editor.execCommand('Paragraph','p',{style:'text-indent:'+ '2em'});
+    //        }
+    //    });
+    //
+    //    //editorui.buttons[cmd] = ui;
+    //    //editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
+    //    //    if (!uiReady) {
+    //    //        var state = editor.queryCommandState('justify');
+    //    //        if (state == -1) {
+    //    //            ui.setDisabled(true);
+    //    //        } else {
+    //    //            ui.setDisabled(false);
+    //    //            ui.setValue(editor.queryCommandValue('justify'));
+    //    //        }
+    //    //    }
+    //    //});
+    //    return ui;
+    //};
 
 })();

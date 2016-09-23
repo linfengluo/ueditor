@@ -35,15 +35,14 @@
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
         , toolbars: [[
             'attachment','bold', 'italic', 'underline','fontfamily', 'fontsize', 'forecolor', 'backcolor', '|',
-            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
-            'insertorderedlist', 'insertunorderedlist',
+            'justifymenu', 'insertunorderedlist','addindent','reduceindent', '|',
             'simpleupload', 'emotion','inserttable','pasteplain',
             'link', 'unlink', 'selectall', 'source', 'fullscreen'
         ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
-        //,labelMap:{
-        //    'anchor':'', 'undo':''
-        //}
+        ,labelMap:{
+            'justifymenu':'对齐'
+        }
 
         //语言配置项,默认是zh-cn。有需要的话也可以使用如下这样的方式来自动多语言切换，当然，前提条件是lang文件夹下存在对应的语言文件：
         //lang值也可以通过自动获取 (navigator.language||navigator.browserLanguage ||navigator.userLanguage).toLowerCase()
@@ -138,7 +137,7 @@
 
         //insertorderedlist
         //有序列表的下拉配置,值留空时支持多语言自动识别，若配置值，则以此值为准
-        ,'insertorderedlist':{
+        //,'insertorderedlist':{
               //自定的样式
               //  'num':'1,2,3...',
               //  'num1':'1),2),3)...',
@@ -147,21 +146,20 @@
               //  'cn1':'一),二),三)....',
               //  'cn2':'(一),(二),(三)....',
              //系统自带
-             'decimal' : '' ,         //'1,2,3...'
-             'lower-alpha' : '' ,    // 'a,b,c...'
-             'lower-roman' : '' ,    //'i,ii,iii...'
-             'upper-alpha' : '' ,   //'A,B,C'
-             'upper-roman' : ''      //'I,II,III...'
-        }
+             //'decimal' : '' ,         //'1,2,3...'
+             //'disc' : '',    // '● 小圆点'
+
+        //}
 
         //insertunorderedlist
         //无序列表的下拉配置，值留空时支持多语言自动识别，若配置值，则以此值为准
         ,insertunorderedlist : { //自定的样式
             //'dash' :'— 破折号', //-破折号
             //'dot':' 。 小圆圈', //系统自带
-            'circle' : '',  // '○ 小圆圈'
+            //'circle' : '',  // '○ 小圆圈'
+            //'square' : ''   //'■ 小方块'
+            'decimal' : '' ,         //'1,2,3...'
             'disc' : '',    // '● 小圆点'
-            'square' : ''   //'■ 小方块'
         }
         //,listDefaultPaddingLeft : '30'//默认的左边缩进的基数倍
         //,listiconpath : 'http://bs.baidu.com/listicon/'//自定义标号的路径
