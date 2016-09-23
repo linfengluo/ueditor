@@ -3,23 +3,44 @@
     background-position: -160px 0;
 }
 
+.edui-default .edui-for-fontfamily .edui-icon {
+    background-position: -384px 0;
+}
+
+.edui-default .edui-for-justifymenu .edui-icon {
+    background-position: 0 0;
+}
+
+.edui-default .edui-for-fontsize .edui-icon {
+    background-position: -411px 0;
+}
+
+.edui-default .edui-for-addindent .edui-icon {
+    background-position: -470px 0;
+}
+
+.edui-default .edui-for-reduceindent .edui-icon {
+    background-position: -632px 0;
+}
+
+
 .edui-default  .edui-for-redo .edui-icon {
     background-position: -100px 0;
 }
 
 .edui-default  .edui-for-bold .edui-icon {
-    background-position: 0 0;
+    background-position: -49px 0;
 }
 
 .edui-default  .edui-for-italic .edui-icon {
-    background-position: -60px 0;
+    background-position: -496px 0;
 }
 
 .edui-default  .edui-for-fontborder .edui-icon {
     background-position:-160px -40px;
 }
 .edui-default  .edui-for-underline .edui-icon {
-    background-position: -140px 0;
+    background-position: -794px 0;
 }
 
 .edui-default  .edui-for-strikethrough .edui-icon {
@@ -39,15 +60,15 @@
 }
 
 .edui-default  .edui-for-forecolor .edui-icon {
-    background-position: -720px 0;
+    background-position: -360px 0;
 }
 
 .edui-default  .edui-for-backcolor .edui-icon {
-    background-position: -760px 0;
+    background-position: -24px 0;
 }
 
 .edui-default  .edui-for-inserttable .edui-icon {
-    background-position: -580px -20px;
+    background-position: -769px 0;
 }
 
 .edui-default  .edui-for-autotypeset .edui-icon {
@@ -75,7 +96,7 @@
 }
 
 .edui-default  .edui-for-insertunorderedlist .edui-icon {
-    background-position: -20px 0;
+    background-position: -542px 0;
 }
 
 .edui-default  .edui-for-lineheight .edui-icon {
@@ -95,7 +116,7 @@
 }
 
 .edui-default  .edui-for-link .edui-icon {
-    background-position: -500px 0;
+    background-position: -517px 0;
 }
 
 .edui-default  .edui-for-code .edui-icon {
@@ -110,8 +131,8 @@
     background-position: -240px -40px;
 }
 
-.edui-default  .edui-for-emoticon .edui-icon {
-    background-position: -60px -20px;
+.edui-default .edui-for-emoticon .edui-icon {
+    background-position: -141px 0;
 }
 
 .edui-default  .edui-for-spechars .edui-icon {
@@ -131,7 +152,7 @@
 }
 
 .edui-default  .edui-for-selectall .edui-icon {
-    background-position: -400px -20px;
+    background-position: -712px 0;
 }
 
 .edui-default  .edui-for-searchreplace .edui-icon {
@@ -187,7 +208,7 @@
 }
 
 .edui-default  .edui-for-source .edui-icon {
-    background-position: -261px -0px;
+    background-position: -737px 0;
 }
 
 .edui-default  .edui-for-removeformat .edui-icon {
@@ -195,7 +216,7 @@
 }
 
 .edui-default  .edui-for-unlink .edui-icon {
-    background-position: -640px 0;
+    background-position: -815px 0;
 }
 
 .edui-default  .edui-for-touppercase .edui-icon {
@@ -415,5 +436,5 @@
 }
 
 .edui-default  .edui-for-simpleupload  .edui-icon {
-    background-position: -380px 0px;
+    background-position: -444px 0;
 }

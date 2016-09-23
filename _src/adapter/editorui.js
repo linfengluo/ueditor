@@ -921,6 +921,8 @@
             editor:editor,
             //添加条目
             items:items,
+            className:'edui-for-' + cmd,
+
             //当选中时要做的事情
             onselect:function (t, index) {
                 //拿到选中条目的值
