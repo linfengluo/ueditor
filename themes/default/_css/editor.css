@@ -1,6 +1,6 @@
 /*UI工具栏、编辑区域、底部*/
 .edui-default .edui-editor {
-    border: 1px solid #d4d4d4;
+    /*border: 1px solid #d4d4d4;*/
     background: none;
     position: relative;
     overflow: visible;

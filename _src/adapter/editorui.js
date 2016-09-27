@@ -44,7 +44,7 @@
         'preview':'~/dialogs/preview/preview.html',
         'emotion':'~/dialogs/emotion/emotion.html',
         'wordimage':'~/dialogs/wordimage/wordimage.html',
-        'attachment':'~/dialogs/attachment/attachment.html',
+        //'attachment':'~/dialogs/attachment/attachment.html',
         'insertframe':'~/dialogs/insertframe/insertframe.html',
         'edittip':'~/dialogs/table/edittip.html',
         'edittable':'~/dialogs/table/edittable.html',
@@ -62,7 +62,7 @@
         'bold', 'italic', 'underline', 'fontborder', 'touppercase', 'tolowercase',
         'strikethrough', 'subscript', 'superscript', 'source', 'indent', 'outdent',
         'blockquote', 'pasteplain', 'pagebreak','justifymenu','addindent','reduceindent',
-        'selectall', 'print','horizontal', 'removeformat', 'time', 'date', 'unlink',
+        'selectall', 'print','horizontal', 'removeformat', 'time', 'date', 'unlink','attachment',
         'insertparagraphbeforetable', 'insertrow', 'insertcol', 'mergeright', 'mergedown', 'deleterow',
         'deletecol', 'splittorows', 'splittocols', 'splittocells', 'mergecells', 'deletetable', 'drafts'];
 
@@ -182,7 +182,7 @@
 
     var dialogBtns = {
         noOk:['searchreplace', 'help', 'spechars', 'webapp','preview'],
-        ok:['attachment', 'anchor', 'link', 'insertimage', 'map', 'gmap', 'insertframe', 'wordimage',
+        ok:[ 'anchor', 'link', 'insertimage', 'map', 'gmap', 'insertframe', 'wordimage',
             'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'scrawl', 'template', 'music', 'background', 'charts']
     };
 
@@ -849,7 +849,9 @@
             ui = new editorui.Button({
                 className:'edui-for-' + name,
                 title:editor.options.labelMap[name] || editor.getLang("labelMap." + name) || '',
-                onclick:function () {},
+                onclick:function () {
+                    console.log("click");
+                },
                 theme:editor.options.theme,
                 showText:false
             });
@@ -951,33 +953,19 @@
         return ui;
     };
 
-    //editorui["addindent"] = function (editor) {
-    //
-    //    //创建下来框
-    //    var ui = new UE.ui.MenuButton({
-    //        //需要指定当前的编辑器实例
-    //        editor:editor,
-    //        //提示
-    //        title:'增加缩颈',
-    //        //当编辑器没有焦点时，combox默认显示的内容
-    //        onbuttonclick:function () {
-    //            editor.execCommand('Paragraph','p',{style:'text-indent:'+ '2em'});
-    //        }
-    //    });
-    //
-    //    //editorui.buttons[cmd] = ui;
-    //    //editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
-    //    //    if (!uiReady) {
-    //    //        var state = editor.queryCommandState('justify');
-    //    //        if (state == -1) {
-    //    //            ui.setDisabled(true);
-    //    //        } else {
-    //    //            ui.setDisabled(false);
-    //    //            ui.setValue(editor.queryCommandValue('justify'));
-    //    //        }
-    //    //    }
-    //    //});
-    //    return ui;
-    //};
+    editorui["attachment"] = function (editor) {
+
+        //创建下来框
+        var ui = new UE.ui.Button({
+            className:'attachmentWrap',
+            editor:editor,
+            title:'附件',
+            onclick:function () {
+            },
+        });
+
+        editorui.buttons['attachment'] = ui;
+        return ui;
+    };
 
 })();

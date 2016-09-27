@@ -14,7 +14,6 @@ UE.plugin.register('simpleupload', function (){
             h = containerBtn.offsetHeight || 20,
             btnIframe = document.createElement('iframe'),
             btnStyle = 'display:block;width:' + w + 'px;height:' + h + 'px;overflow:hidden;border:0;margin:0;padding:0;position:absolute;top:0;left:0;filter:alpha(opacity=0);-moz-opacity:0;-khtml-opacity: 0;opacity: 0;cursor:pointer;';
-
         domUtils.on(btnIframe, 'load', function(){
 
             var timestrap = (+new Date()).toString(36),
@@ -26,9 +25,9 @@ UE.plugin.register('simpleupload', function (){
             btnIframeBody = btnIframeDoc.body;
             wrapper = btnIframeDoc.createElement('div');
 
-            wrapper.innerHTML = '<form id="edui_form_' + timestrap + '" target="edui_iframe_' + timestrap + '" method="POST" enctype="multipart/form-data" action="' + me.getOpt('serverUrl') + '" ' +
+            wrapper.innerHTML = '<form id="edui_form_' + timestrap + '" target="edui_iframe_' + timestrap + '" method="POST" enctype="multipart/form-data" action="' + me.getOpt('imageUploadUrl') + '" ' +
             'style="' + btnStyle + '">' +
-            '<input id="edui_input_' + timestrap + '" type="file" accept="image/*" name="' + me.options.imageFieldName + '" ' +
+            '<input id="edui_input_' + timestrap + '" type="file" accept="image/gif, image/jpeg, image/png, image/jpg,image/bmp" name="filedata" ' +
             'style="' + btnStyle + '">' +
             '</form>' +
             '<iframe id="edui_iframe_' + timestrap + '" name="edui_iframe_' + timestrap + '" style="display:none;width:0;height:0;border:0;margin:0;padding:0;position:absolute;"></iframe>';
@@ -52,9 +51,7 @@ UE.plugin.register('simpleupload', function (){
             domUtils.on(input, 'change', function(){
                 if(!input.value) return;
                 var loadingId = 'loading_' + (+new Date()).toString(36);
-                var params = utils.serializeParam(me.queryCommandValue('serverparam')) || '';
 
-                var imageActionUrl = me.getActionUrl(me.getOpt('imageActionName'));
                 var allowFiles = me.getOpt('imageAllowFiles');
 
                 me.focus();
@@ -66,8 +63,9 @@ UE.plugin.register('simpleupload', function (){
                             body = (iframe.contentDocument || iframe.contentWindow.document).body,
                             result = body.innerText || body.textContent || '';
                         json = (new Function("return " + result))();
-                        link = me.options.imageUrlPrefix + json.url;
-                        if(json.state == 'SUCCESS' && json.url) {
+                        json.msg = json.msg.substring(1);
+                        link = json.msg;
+                        if(json.err == '' && json.msg) {
                             loader = me.document.getElementById(loadingId);
                             loader.setAttribute('src', link);
                             loader.setAttribute('_src', link);
@@ -98,10 +96,10 @@ UE.plugin.register('simpleupload', function (){
                 }
 
                 /* 判断后端配置是否没有加载成功 */
-                if (!me.getOpt('imageActionName')) {
-                    errorHandler(me.getLang('autoupload.errorLoadConfig'));
-                    return;
-                }
+                //if (!me.getOpt('imageActionName')) {
+                //    errorHandler(me.getLang('autoupload.errorLoadConfig'));
+                //    return;
+                //}
                 // 判断文件格式是否错误
                 var filename = input.value,
                     fileext = filename ? filename.substr(filename.lastIndexOf('.')):'';
@@ -111,7 +109,7 @@ UE.plugin.register('simpleupload', function (){
                 }
 
                 domUtils.on(iframe, 'load', callback);
-                form.action = utils.formatUrl(imageActionUrl + (imageActionUrl.indexOf('?') == -1 ? '?':'&') + params);
+                form.action = utils.formatUrl(me.getOpt('imageUploadUrl'));
                 form.submit();
             });
 
@@ -151,7 +149,8 @@ UE.plugin.register('simpleupload', function (){
             /* 初始化简单上传按钮 */
             'simpleuploadbtnready': function(type, container) {
                 containerBtn = container;
-                me.afterConfigReady(initUploadBtn);
+                //me.afterConfigReady(initUploadBtn);
+                initUploadBtn();
             }
         },
         outputRule: function(root){

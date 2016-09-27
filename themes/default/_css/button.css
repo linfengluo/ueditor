@@ -8,6 +8,10 @@
     background-image: url(../images/icons.gif) \9;
 }
 
+.edui-default .edui-toolbar .attachmentWrap .edui-icon {
+    width: 76px !important;
+}
+
 .edui-default .edui-toolbar .edui-button .edui-button-wrap {
     padding: 1px;
     position: relative;

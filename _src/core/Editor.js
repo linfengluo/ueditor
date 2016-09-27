@@ -1510,17 +1510,32 @@
             var actionName = this.getOpt(action) || action,
                 imageUrl = this.getOpt('imageUrl'),
                 serverUrl = this.getOpt('serverUrl');
-
-            if(!serverUrl && imageUrl) {
-                serverUrl = imageUrl.replace(/^(.*[\/]).+([\.].+)$/, '$1controller$2');
+            switch (actionName){
+                case 'uplaodimage':
+                    return utils.formatUrl('/w2/mail/uploadImages.do');
+                    break;
+                case 'config':
+                    return;
+                    break;
+                case 'uplaodscrawl':
+                    break;
+                case 'listimage':
+                    break
+                default:
+                    return utils.formatUrl('/w2/mail/uploadImages.do');
             }
-
-            if(serverUrl) {
-                serverUrl = serverUrl + (serverUrl.indexOf('?') == -1 ? '?':'&') + 'action=' + (actionName || '');
-                return utils.formatUrl(serverUrl);
-            } else {
-                return '';
-            }
+            return utils.formatUrl('/w2/mail/uploadImages.do');
+            //if(!serverUrl && imageUrl) {
+            //
+            //    serverUrl = imageUrl.replace(/^(.*[\/]).+([\.].+)$/, '$1controller$2');
+            //}
+            //
+            //if(serverUrl) {
+            //    serverUrl = serverUrl + (serverUrl.indexOf('?') == -1 ? '?':'&') + 'action=' + (actionName || '');
+            //    return utils.formatUrl(serverUrl);
+            //} else {
+            //    return '';
+            //}
         }
     };
     utils.inherits(Editor, EventBase);
