@@ -69,6 +69,12 @@
     background-color: #4f96f2;
 }
 
+.edui-for-cloudfile .edui-default .edui-state-checked .edui-menuitem-body {
+    background-color: #FFFFFF;
+}
+
+
+
 .edui-for-fontsize .edui-default .edui-state-checked .edui-menuitem-body,
 .edui-for-paragraph .edui-default .edui-state-checked .edui-menuitem-body,
 .edui-for-fontfamily .edui-default .edui-state-checked .edui-menuitem-body,

@@ -651,7 +651,7 @@ var CodeMirror = (function() {
             setSelection(selFrom, selTo, updateLine(sel.from.line), updateLine(sel.to.line));
 
             // Make sure the scroll-size div has the correct height.
-            code.style.height = (doc.height * textHeight() + 2 * paddingTop()) + "px";
+            code.style.minHeight = (doc.height * textHeight() + 2 * paddingTop()) + "px";
         }
 
         function replaceRange(code, from, to) {
@@ -844,7 +844,7 @@ var CodeMirror = (function() {
             showingFrom = from; showingTo = to;
             displayOffset = heightAtLine(doc, from);
             mover.style.top = (displayOffset * th) + "px";
-            code.style.height = (doc.height * th + 2 * paddingTop()) + "px";
+            code.style.minHeight = (doc.height * th + 2 * paddingTop()) + "px";
 
             // Since this is all rather error prone, it is honoured with the
             // only assertion in the whole file.

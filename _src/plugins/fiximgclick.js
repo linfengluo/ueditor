@@ -71,7 +71,7 @@ UE.plugins['fiximgclick'] = (function () {
                     + '.edui-editor-imagescale .edui-editor-imagescale-hand5{cursor:sw-resize;top:100%;margin-top:-3px;left:0;margin-left:-4px;}'
                     + '.edui-editor-imagescale .edui-editor-imagescale-hand6{cursor:s-resize;top:100%;margin-top:-3px;left:50%;margin-left:-4px;}'
                     + '.edui-editor-imagescale .edui-editor-imagescale-hand7{cursor:se-resize;top:100%;margin-top:-3px;left:100%;margin-left:-3px;}'
-                    + '.edui-scale-toolbar{width: 200px; height: 30px; position: absolute; top: 0; background-color: rgba(255,255,255,0.85);}'
+                    + '.edui-scale-toolbar{min-width: 200px; height: 30px; position: absolute; top: 0; background-color: rgba(255,255,255,0.85);}'
                     + '.edui-scale-item{display: inlink-block; float: left; margin: 0 5px; font-size: 12px; line-height: 30px; color: #7eaed9; text-decoration:none;}'
                     + '.edui-scale-item:hover{color: #0a5296;}'
                     + '.edui-scale-disabled{color: #999999; cursor: default;}'
@@ -93,6 +93,9 @@ UE.plugins['fiximgclick'] = (function () {
                 me.target.width = parseInt(me.resizer.style.width);
                 me.target.height = parseInt(me.resizer.style.height);
                 me.attachTo(me.target);
+                setTimeout(function(){
+                    me.editor.fireEvent('contentchange');
+                }, 200)
             },
             updateContainerStyle: function (dir, offset) {
                 var me = this,
@@ -147,6 +150,7 @@ UE.plugins['fiximgclick'] = (function () {
                 var $target = me.target;
                 var height = $target.height;
                 var width = $target.width;
+                var naturalSize = [me.target.naturalWidth, me.target.naturalHeight];
                 switch (type){
                     case "0":
                         me.resetTargetElement($target, height, width);
@@ -154,9 +158,9 @@ UE.plugins['fiximgclick'] = (function () {
                     case "1":
                         var wrapWidth = me.editor.body.offsetWidth;
                         if(wrapWidth <= width * 1.1 ){
-                            var delat = wrapWidth - width;
+                            var delat = wrapWidth - width - 5;
                             var x = delat;
-                            var y = delat / wrapWidth * height
+                            var y = naturalSize[1] / naturalSize[0] * ( wrapWidth - 5) - height;
                             me.updateContainerStyle(7, {x: x, y: y});
                             me.updateTargetElement();
                             return;
@@ -183,9 +187,15 @@ UE.plugins['fiximgclick'] = (function () {
             resetTargetElement: function($target, height, width){
                 var me = this;
                 var naturalSize = [me.target.naturalWidth, me.target.naturalHeight];
+                var maxWidth = me.editor.body.offsetWidth;
+                if(naturalSize[0] < maxWidth){
+                    me.updateContainerStyle(7, {x: naturalSize[0] - width, y: naturalSize[1] - height});
+                    me.updateTargetElement();
+                }else{
+                    me.updateContainerStyle(7, {x: maxWidth - 5 - width, y: naturalSize[1] / naturalSize[0] * ( maxWidth - 5) - height});
+                    me.updateTargetElement();
+                }
 
-                me.updateContainerStyle(7, {x: naturalSize[0] - width, y: naturalSize[1] - height});
-                me.updateTargetElement();
             },
 
             show: function (targetObj) {

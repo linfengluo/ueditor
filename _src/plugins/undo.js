@@ -133,7 +133,6 @@ UE.plugins['undo'] = function () {
             //这个会引起回退时导致空格丢失的情况
 //            browser.ie && (cont = cont.replace(/>&nbsp;</g, '><').replace(/\s*</g, '<').replace(/>\s*/g, '>'));
             me.fireEvent('aftergetscene');
-
             return {
                 address:rngAddress,
                 content:cont

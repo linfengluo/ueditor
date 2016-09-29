@@ -35,10 +35,10 @@
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
         , toolbars: [[
-            'attachment','bold', 'italic', 'underline','fontfamily', 'fontsize', 'forecolor', 'backcolor', '|',
+            'attachment','cloudfile','bold', 'italic', 'underline','fontfamily', 'fontsize', 'forecolor', 'backcolor', '|',
             'justifymenu', 'insertunorderedlist','addindent','reduceindent', '|',
             'simpleupload', 'emotion','inserttable',
-            'link', 'unlink', 'selectall', 'source', 'fullscreen'
+            'link', 'unlink', 'selectall', 'source'
         ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         ,labelMap:{
@@ -55,7 +55,7 @@
         //,theme:'189'
         //,themePath:URL +"themes/"
 
-        //,zIndex : 900     //编辑器层级的基数,默认是900
+        ,zIndex : 900     //编辑器层级的基数,默认是900
 
         //针对getAllHtml方法，会在对应的head标签中增加该编码设置。
         //,charset:"utf-8"
@@ -81,7 +81,7 @@
 
         //indentValue
         //首行缩进距离,默认是2em
-        //,indentValue:'2em'
+        ,indentValue:'0'
 
         //,initialFrameWidth:1000  //初始化编辑器宽度,默认1000
         //,initialFrameHeight:320  //初始化编辑器高度,默认320
@@ -93,7 +93,7 @@
         //启用自动保存
         ,enableAutoSave: false
         //自动保存间隔时间， 单位ms
-        //,saveInterval: 500
+        ,saveInterval: 5000000000000
 
         //,fullscreen : false //是否开启初始化时即全屏，默认关闭
 
@@ -253,7 +253,7 @@
         //tab
         //点击tab键时移动的距离,tabSize倍数，tabNode什么字符做为单位
         //,tabSize:4
-        //,tabNode:'&nbsp;'
+        //,tabNode:''
 
         //removeFormat
         //清除格式时可以删除的标签和属性
@@ -266,7 +266,7 @@
         //可以最多回退的次数,默认20
         //,maxUndoCount:20
         //当输入的字符数超过该值时，保存一次现场
-        //,maxInputCount:1
+        ,maxInputCount:1000000000
 
         //autoHeightEnabled
         // 是否自动长高,默认true
@@ -280,9 +280,10 @@
 
         //autoFloatEnabled
         //是否保持toolbar的位置不动,默认true
-        //,autoFloatEnabled:true
-        //浮动时工具栏距离浏览器顶部的高度，用于某些具有固定头部的页面
-        //,topOffset:30
+        ,autoFloatEnabled:false
+        //浮动时工具栏
+        // 距离浏览器顶部的高度，用于某些具有固定头部的页面
+        //,topOffset:160
         //编辑器底部距离工具栏高度(如果参数大于等于编辑器高度，则设置无效)
         //,toolbarTopOffset:400
 
@@ -368,6 +369,7 @@
 			bdo:    ['dir'],
 			big:    [],
 			blockquote: ['cite', 'class', 'style'],
+            body:   [],
 			br:     [],
 			caption: ['class', 'style'],
 			center: [],
@@ -391,6 +393,7 @@
 			h5:     ['class', 'style'],
 			h6:     ['class', 'style'],
 			header: [],
+            html:   [],
 			hr:     [],
 			i:      ['class', 'style'],
 			img:    ['src', 'alt', 'title', 'width', 'height', 'id', '_src', 'loadingclass', 'class', 'data-latex'],

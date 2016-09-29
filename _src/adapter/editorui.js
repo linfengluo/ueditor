@@ -58,7 +58,7 @@
         'charts': '~/dialogs/charts/charts.html'
     };
     //为工具栏添加按钮，以下都是统一的按钮触发命令，所以写在一起
-    var btnCmds = ['undo', 'redo', 'formatmatch',
+    var btnCmds = ['undo', 'redo', 'formatmatch','cloudfile',
         'bold', 'italic', 'underline', 'fontborder', 'touppercase', 'tolowercase',
         'strikethrough', 'subscript', 'superscript', 'source', 'indent', 'outdent',
         'blockquote', 'pasteplain', 'pagebreak','justifymenu','addindent','reduceindent',
@@ -876,7 +876,6 @@
         return ui;
     };
 
-
     //对齐下拉框
     editorui["justifymenu"] = function (editor) {
         var cmd = "justifymenu";
@@ -965,6 +964,52 @@
         });
 
         editorui.buttons['attachment'] = ui;
+        return ui;
+    };
+
+    editorui['cloudfile'] = function (editor, list, title) {
+
+        list = [{
+            label:'从天翼云选择附件',
+            cmdName:'',
+            value:'cloudfile'
+        }];
+        title = '天翼云附件';
+        if (!list.length) return;
+        for (var i = 0, ci, items = []; ci = list[i]; i++) {
+            var langLabel = editor.getLang('fontfamily')[ci.name] || "";
+            (function (key, val) {
+                items.push({
+                    label:key,
+                    value:val,
+                    theme:editor.options.theme,
+                    renderLabelHtml:function () {
+                        return '<div class="edui-label edui-listitem-label edui-default" id="J_cloudFile" data-toggle="modal" data-target="#cloud-file">' + (this.label || '') + '</div>';
+                    },
+                });
+            })(ci.label || langLabel, ci.val)
+        }
+        var ui = new editorui.MenuButton({
+            editor:editor,
+            items:items,
+            onbuttonclick:function () {
+                this.showPopup();
+            },
+            title:title,
+            className:'edui-for-cloudfile',
+        });
+        editorui.buttons['cloudfile'] = ui;
+        editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
+            if (!uiReady) {
+                var state = editor.queryCommandState('cloudfile');
+                if (state == -1) {
+                    ui.setDisabled(true);
+                } else {
+                    ui.setDisabled(false);
+                }
+            }
+
+        });
         return ui;
     };
 

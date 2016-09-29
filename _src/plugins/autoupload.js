@@ -12,9 +12,10 @@ UE.plugin.register('autoupload', function (){
         //模拟数据
         var fieldName, urlPrefix, maxSize, allowFiles, actionUrl,
             loadingHtml, errorHandler, successHandler,
-            filetype = /image\/\w+/i.test(file.type) ? 'image':'file',
+            filetype = /image\/\w+/i.test(file.type) ? 'image': '',
             loadingId = 'loading_' + (+new Date()).toString(36);
 
+        if(filetype !== 'image') return;
         fieldName = me.getOpt(filetype + 'FieldName');
         urlPrefix = me.getOpt(filetype + 'UrlPrefix');
         maxSize = me.getOpt(filetype + 'MaxSize');
@@ -36,7 +37,11 @@ UE.plugin.register('autoupload', function (){
                 me.options.themePath + me.options.theme +
                 '/images/spacer.gif" title="' + (me.getLang('autoupload.loading') || '') + '" >';
             successHandler = function(data) {
-                var link = urlPrefix + data.url,
+                var url = data.msg.substring(1);
+                var maxWidth =me.body.offsetWidth - 10;
+                var imgWidth = maxWidth + "px";
+
+                var link = url,
                     loader = me.document.getElementById(loadingId);
                 if (loader) {
                     loader.setAttribute('src', link);
@@ -44,6 +49,7 @@ UE.plugin.register('autoupload', function (){
                     loader.setAttribute('title', data.title || '');
                     loader.setAttribute('alt', data.original || '');
                     loader.removeAttribute('id');
+                    loader.setAttribute('style', 'max-width: '+ imgWidth);
                     domUtils.removeClasses(loader, 'loadingclass');
                 }
             };
@@ -54,6 +60,8 @@ UE.plugin.register('autoupload', function (){
                 '/images/spacer.gif" title="' + (me.getLang('autoupload.loading') || '') + '" >' +
                 '</p>';
             successHandler = function(data) {
+                console.log(data);
+                console.log("^^^^^^^^^^^")
                 var link = urlPrefix + data.url,
                     loader = me.document.getElementById(loadingId);
 
@@ -69,10 +77,10 @@ UE.plugin.register('autoupload', function (){
         me.execCommand('inserthtml', loadingHtml);
 
         /* 判断后端配置是否没有加载成功 */
-        if (!me.getOpt(filetype + 'ActionName')) {
-            errorHandler(me.getLang('autoupload.errorLoadConfig'));
-            return;
-        }
+        //if (!me.getOpt(filetype + 'ActionName')) {
+        //    errorHandler(me.getLang('autoupload.errorLoadConfig'));
+        //    return;
+        //}
         /* 判断文件大小是否超出限制 */
         if(file.size > maxSize) {
             errorHandler(me.getLang('autoupload.exceedSizeError'));
@@ -88,17 +96,16 @@ UE.plugin.register('autoupload', function (){
         /* 创建Ajax并提交 */
         var xhr = new XMLHttpRequest(),
             fd = new FormData(),
-            params = utils.serializeParam(me.queryCommandValue('serverparam')) || '',
-            url = utils.formatUrl(actionUrl + (actionUrl.indexOf('?') == -1 ? '?':'&') + params);
+            url = utils.formatUrl(actionUrl);
 
-        fd.append(fieldName, file, file.name || ('blob.' + file.type.substr('image/'.length)));
-        fd.append('type', 'ajax');
+        fd.append('filedata', file, file.name || ('blob.' + file.type.substr('image/'.length)));
+        //fd.append('type', 'ajax');
         xhr.open("post", url, true);
         xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         xhr.addEventListener('load', function (e) {
             try{
                 var json = (new Function("return " + utils.trim(e.target.response)))();
-                if (json.state == 'SUCCESS' && json.url) {
+                if (json.err == '' && json.msg) {
                     successHandler(json);
                 } else {
                     errorHandler(json.state);

@@ -573,7 +573,6 @@
 
                 scalelayer.style.cssText = "position:absolute;left:0;display:;top:0;background-color:#41ABFF;opacity:0.4;filter: Alpha(opacity=40);width:" + editorHolder.offsetWidth + "px;height:"
                     + editorHolder.offsetHeight + "px;z-index:" + (editor.options.zIndex + 1);
-
                 domUtils.on(doc, "mousemove", move);
                 domUtils.on(editorDocument, "mouseup", up);
                 domUtils.on(doc, "mouseup", up);

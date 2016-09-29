@@ -43,8 +43,6 @@ UE.plugins['autoheight'] = function () {
                     }
                     domUtils.removeStyle(node,'clear');
                 }
-
-
             },50)
         }
     }
@@ -66,7 +64,6 @@ UE.plugins['autoheight'] = function () {
         doc.body.style.overflowY = 'hidden';
         me.addListener('contentchange afterinserthtml keyup mouseup',adjustHeight);
         //ff不给事件算得不对
-
         setTimeout(function () {
             adjustHeight.call(me);
         }, browser.gecko ? 100 : 0);

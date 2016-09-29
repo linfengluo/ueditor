@@ -1,7 +1,7 @@
 /*表情按钮及弹出菜单*/
 /*去除了表情的下拉箭头*/
 .edui-default .edui-for-emotion .edui-icon {
-    background-position: -141px 0;
+    background-position: -146px 2px;
 }
 .edui-default .edui-for-emotion .edui-popup-content iframe
 {

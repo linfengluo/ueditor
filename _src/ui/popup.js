@@ -195,7 +195,7 @@
             popEl.className += ' ' + ANCHOR_CLASSES[(sideUp ? 1 : 0) * 2 + (sideLeft ? 1 : 0)];
             if(this.editor){
                 popEl.style.zIndex = this.editor.container.style.zIndex * 1 + 10;
-                baidu.editor.ui.uiUtils.getFixedLayer().style.zIndex = popEl.style.zIndex - 1;
+                baidu.editor.ui.uiUtils.getFixedLayer().style.zIndex = 1000002;
             }
             this.getDom().style.visibility = 'visible';
 
@@ -245,7 +245,7 @@
         }
     };
     utils.inherits(Popup, UIBase);
-    
+
     domUtils.on( document, 'mousedown', function ( evt ) {
         var el = evt.target || evt.srcElement;
         closeAllPopup( evt,el );

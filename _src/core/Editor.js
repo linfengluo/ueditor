@@ -621,7 +621,6 @@
             this.body.style.height = height + 'px';
             !notSetHeight && this.trigger('setHeight')
         },
-
         /**
          * 为编辑器的编辑命令提供快捷键
          * 这个接口是为插件扩展提供的接口,主要是为新添加的插件，如果需要添加快捷键，所提供的接口
@@ -833,6 +832,7 @@
             var root = UE.htmlparser(html);
             me.filterInputRule(root);
             html = root.toHtml();
+
 
             me.body.innerHTML = (isAppendTo ? me.body.innerHTML : '') + html;
 

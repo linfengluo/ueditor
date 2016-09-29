@@ -10,8 +10,8 @@
 
 .edui-default .edui-list .edui-state-hover {
     position: relative;
-    background-color: #fff5d4;
-    border: 1px solid #dcac6c;
+    border: 1px solid #999;
+    background: transparent;
     padding: 0;
 }
 

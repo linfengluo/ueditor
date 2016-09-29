@@ -66,11 +66,14 @@ UE.plugin.register('simpleupload', function (){
                         json.msg = json.msg.substring(1);
                         link = json.msg;
                         if(json.err == '' && json.msg) {
+                            var maxWidth =me.body.offsetWidth - 10;
+                            var imgWidth = maxWidth + "px";
                             loader = me.document.getElementById(loadingId);
                             loader.setAttribute('src', link);
                             loader.setAttribute('_src', link);
                             loader.setAttribute('title', json.title || '');
                             loader.setAttribute('alt', json.original || '');
+                            loader.setAttribute('style', 'max-width: '+ imgWidth);
                             loader.removeAttribute('id');
                             domUtils.removeClasses(loader, 'loadingclass');
                         } else {
@@ -80,6 +83,9 @@ UE.plugin.register('simpleupload', function (){
                         showErrorLoader && showErrorLoader(me.getLang('simpleupload.loadError'));
                     }
                     form.reset();
+                    setTimeout(function(){
+                        me.fireEvent('contentchange');
+                    }, 300)
                     domUtils.un(iframe, 'load', callback);
                 }
                 function showErrorLoader(title){

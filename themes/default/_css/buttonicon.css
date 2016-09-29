@@ -4,27 +4,34 @@
 }
 
 .edui-default .edui-for-fontfamily .edui-icon {
-    background-position: -384px 0;
+    background-position: -677px 2px;
+}
+
+.edui-default .edui-for-cloudfile .edui-icon {
+    background-position: -127px 8px;
 }
 
 .edui-default .attachmentWrap .edui-icon {
-    background-position: -166px 0;
+    background-position: -168px 2px;
+    font-size: 0;
+    color: transparent;
+    text-indent: -999px;
 }
 
 .edui-default .edui-for-justifymenu .edui-icon {
-    background-position: 0 0;
+    background-position: 2px 3px;
 }
 
 .edui-default .edui-for-fontsize .edui-icon {
-    background-position: -411px 0;
+    background-position: -291px 2px;
 }
 
 .edui-default .edui-for-addindent .edui-icon {
-    background-position: -470px 0;
+    background-position: -341px 3px;
 }
 
 .edui-default .edui-for-reduceindent .edui-icon {
-    background-position: -632px 0;
+    background-position: -456px 3px;
 }
 
 
@@ -33,18 +40,18 @@
 }
 
 .edui-default  .edui-for-bold .edui-icon {
-    background-position: -49px 0;
+    background-position: -42px 2px;
 }
 
 .edui-default  .edui-for-italic .edui-icon {
-    background-position: -496px 0;
+    background-position: -361px 3px;
 }
 
 .edui-default  .edui-for-fontborder .edui-icon {
     background-position:-160px -40px;
 }
 .edui-default  .edui-for-underline .edui-icon {
-    background-position: -794px 0;
+    background-position: -626px 2px;
 }
 
 .edui-default  .edui-for-strikethrough .edui-icon {
@@ -64,15 +71,15 @@
 }
 
 .edui-default  .edui-for-forecolor .edui-icon {
-    background-position: -360px 0;
+    background-position: -245px 2px;
 }
 
 .edui-default  .edui-for-backcolor .edui-icon {
-    background-position: -24px 0;
+    background-position: -21px 2px;
 }
 
 .edui-default  .edui-for-inserttable .edui-icon {
-    background-position: -769px 0;
+    background-position: -605px 2px;
 }
 
 .edui-default  .edui-for-autotypeset .edui-icon {
@@ -92,15 +99,15 @@
 }
 
 .edui-default  .edui-for-justifyjustify .edui-icon {
-    background-position: -440px 0;
+    background-position: 2px 3px;
 }
 
 .edui-default  .edui-for-insertorderedlist .edui-icon {
-    background-position: -80px 0;
+    background-position: -407px 4px;
 }
 
 .edui-default  .edui-for-insertunorderedlist .edui-icon {
-    background-position: -542px 0;
+    background-position: -407px 4px;
 }
 
 .edui-default  .edui-for-lineheight .edui-icon {
@@ -120,7 +127,7 @@
 }
 
 .edui-default  .edui-for-link .edui-icon {
-    background-position: -517px 0;
+    background-position: -382px 2px;
 }
 
 .edui-default  .edui-for-code .edui-icon {
@@ -128,7 +135,7 @@
 }
 
 .edui-default  .edui-for-insertimage .edui-icon {
-    background-position: -726px -77px;
+    background-position: -317px 2px;
 }
 
 .edui-default  .edui-for-insertframe .edui-icon {
@@ -136,7 +143,7 @@
 }
 
 .edui-default .edui-for-emoticon .edui-icon {
-    background-position: -141px 0;
+    background-position: -146px 2px;
 }
 
 .edui-default  .edui-for-spechars .edui-icon {
@@ -156,7 +163,7 @@
 }
 
 .edui-default  .edui-for-selectall .edui-icon {
-    background-position: -712px 0;
+    background-position: -545px 2px;
 }
 
 .edui-default  .edui-for-searchreplace .edui-icon {
@@ -212,7 +219,7 @@
 }
 
 .edui-default  .edui-for-source .edui-icon {
-    background-position: -737px 0;
+    background-position: -579px 2px;
 }
 
 .edui-default  .edui-for-removeformat .edui-icon {
@@ -220,7 +227,7 @@
 }
 
 .edui-default  .edui-for-unlink .edui-icon {
-    background-position: -815px 0;
+    background-position: -649px 0;
 }
 
 .edui-default  .edui-for-touppercase .edui-icon {
@@ -352,7 +359,7 @@
 }
 
 .edui-default  .edui-for-attachment .edui-icon {
-    background-position: -620px -40px;
+    background-position: -168px 2px;
 }
 
 .edui-default  .edui-for-edittd .edui-icon {
@@ -440,5 +447,5 @@
 }
 
 .edui-default  .edui-for-simpleupload  .edui-icon {
-    background-position: -444px 0;
+    background-position: -317px 2px;
 }
