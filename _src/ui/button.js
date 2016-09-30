@@ -42,6 +42,13 @@
                     '</div>' +
                     '</div>' +
                     '</div></div>';
+            }else if(this.className === 'edui-dialog-closebutton'){
+                return '<div id="##" class="edui-box %%">' +
+                    '<div id="##_state" stateful>' +
+                    '<div class="%%-wrap"><div id="##_body" unselectable="on" ' + (this.title ? 'title="' + this.title + '"' : '') +
+                    ' class="%%-body" onmousedown="return $$._onMouseDown(event, this);" onclick="return $$._onClick(event, this);">×</div>' +
+                    '</div>' +
+                    '</div></div>';
             }else{
                 return '<div id="##" class="edui-box %%">' +
                     '<div id="##_state" stateful>' +
