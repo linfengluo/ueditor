@@ -57,6 +57,11 @@ UE.plugin.register('simpleupload', function (){
                 me.focus();
                 me.execCommand('inserthtml', '<img class="loadingclass" id="' + loadingId + '" src="' + me.options.themePath + me.options.theme +'/images/spacer.gif" title="' + (me.getLang('simpleupload.loading') || '') + '" >');
 
+                var dialog = me.getDialog('imagetemp');
+                if(dialog){
+                    dialog._hide();
+                }
+                //me.getDialog("imagetemp");
                 function callback(){
                     try{
                         var link, json, loader,
@@ -154,6 +159,7 @@ UE.plugin.register('simpleupload', function (){
             },
             /* 初始化简单上传按钮 */
             'simpleuploadbtnready': function(type, container) {
+                console.log(container);
                 containerBtn = container;
                 //me.afterConfigReady(initUploadBtn);
                 initUploadBtn();

@@ -247,6 +247,13 @@
     height: 400px;
     overflow: hidden;
 }
+
+/*wordImage-dialog*/
+.edui-default .edui-for-imagetemp .edui-dialog-content {
+    width: 440px;
+    height: 250px;
+    overflow: hidden;
+}
 /*webapp-dialog*/
 .edui-default .edui-for-webapp .edui-dialog-content {
     width: 560px;

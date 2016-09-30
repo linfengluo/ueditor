@@ -1,0 +1,135 @@
+@charset "utf-8";
+/* dialog样式 */
+
+a{
+    text-decoration: none;
+}
+.wrapper {
+    zoom: 1;
+    width: 400px;
+    *width: 395px;
+    height: 230px;
+    margin: 0 auto;
+    position: relative;
+    font-family: sans-serif;
+}
+
+.header{
+    padding: 3px 15px;
+    border-bottom: 1px solid #d1d1d1;
+    background-color: #f3f3f3;
+    position: relative;
+    cursor: default;
+}
+
+.title{
+    line-height: 18px;
+    font-size: 14px;
+    color: #666;
+    margin: 20px auto 0 17px;
+    font-weight: bold;
+    display: block;
+}
+
+.cancle{
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 5px 15px 0 0;
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 24px;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .6;
+    filter: alpha(opacity=60);
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+
+.tab-content{
+    overflow: hidden;
+    margin: 10px;
+}
+
+.tab-content span{
+    width: 46%;
+    display: inline-block;
+    padding: 0 1%;
+    height: 30px;
+    border: 1px solid #ccc;
+    background: url("images/dialog-title-bg.png") repeat-x;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+.content{
+    margin: 0 10px;
+    color: #838383;
+}
+
+.upload-content{
+    height: 100px;
+    padding-top: 20px;
+    line-height: 30px;
+}
+.tab-content span.focus{
+    height: 31px;
+    border-bottom: none;
+    background: #fff;
+}
+
+.upload-tab{
+
+}
+
+.online-content{
+    display: none;
+}
+
+.footer{
+    text-align: right;
+    margin-top: 20px;
+
+}
+
+.footer .btn{
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+    padding: 0 14px 0 14px;
+    line-height: 28px;
+    height: 28px;
+    background-color: #eff0f3;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+    border: 1px solid #cdcdcd;
+    color: #4d4d4d;
+    font-size: 12px;
+    outline: none;
+}
+
+.footer .upload-btn{
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    background-color: #f90;
+    border-color: #d97b00;
+}
+
+.footer .upload-btn a{
+    color: #fff;
+}
+
+.footer .upload-cancle a{
+    color: #4d4d4d;
+}
+
+

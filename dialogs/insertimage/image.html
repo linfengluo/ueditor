@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ueditor图片对话框</title>
+    <!--<script type="text/javascript" src="../internal.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="image.css">
+    <!-- image dialog -->
+</head>
+<body>
+    <div class="wrapper">
+        <div class="tab-content">
+            <span class="upload-tab focus" id="uploadTab">上传图片</span>
+            <span class="online-tab" id="onlineTab">远程图片</span>
+        </div>
+        <div class="content">
+            <div class="upload-content" id="uploadContengt" style="display: none">
+                <p>点击“浏览”，在您电脑中选择要上传的图片，每张图片上传完毕后将会自动添加到正文中</p>
+            </div>
+            <div class="online-content" id="onlineConetent">
+
+            </div>
+        </div>
+        <div class="footer">
+            <div class="upload-footer">
+                <div class="btn upload-btn" id="upload">
+                    <a href="javascript:;">浏览</a>
+                </div>
+                <div class="btn upload-cancle" id="cancle">
+                    <a href="javascript:;">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../third-party/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            window.onload = function () {
+                initTabs();
+            };
+
+            function initTabs(){
+
+                var uploadContent = document.getElementById('uploadContent');
+                var onlineContent = document.getElementById('onlineConetent');
+                var btn = document.getElementById("upload");
+//                editor.fireEvent('simpleuploadbtnready', btn);
+
+                var cancleBtn = document.getElementById('cancle');
+                cancleBtn.onclick = function(){
+//                    editor.getDialog('imagetemp')._hide();
+                }
+
+                var upload = document.getElementById('uploadTab');
+                upload.onclick = function(){
+                    uploadContent.style.display = "block";
+                    onlineContent.style.display = "none";
+                }
+
+
+            }
+        })();
+    </script>
+</body>
+</html>
