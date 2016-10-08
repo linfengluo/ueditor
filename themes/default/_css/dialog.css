@@ -127,6 +127,7 @@
 
 .edui-default .edui-dialog-buttons .edui-button {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .edui-default .edui-dialog-buttons .edui-button .edui-button-body {
@@ -145,6 +146,7 @@
     color: #4d4d4d;
     font-size: 12px;
     outline: none;
+    cursor: pointer;
 }
 
 .edui-default .edui-dialog-buttons .edui-okbutton .edui-button-body{
@@ -159,6 +161,7 @@
 .edui-default .edui-dialog-buttons .edui-button .edui-label{
     height: 28px;
     line-height: 28px;
+    cursor: pointer;
 }
 
 .edui-default .edui-dialog-buttons .edui-okbutton .edui-state-hover .edui-button-body {
@@ -249,7 +252,7 @@
 }
 
 /*wordImage-dialog*/
-.edui-default .edui-for-imagetemp .edui-dialog-content {
+.edui-default .edui-for-imagedialog .edui-dialog-content {
     width: 440px;
     height: 250px;
     overflow: hidden;

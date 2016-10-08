@@ -56,7 +56,7 @@
         'template':'~/dialogs/template/template.html',
         'background':'~/dialogs/background/background.html',
         'charts': '~/dialogs/charts/charts.html',
-        'imagetemp': '~/dialogs/insertimage/image.html'
+        'imagedialog': '~/dialogs/insertimage/image.html'
     };
     //为工具栏添加按钮，以下都是统一的按钮触发命令，所以写在一起
     var btnCmds = ['undo', 'redo', 'formatmatch','cloudfile',
@@ -182,7 +182,7 @@
 
 
     var dialogBtns = {
-        noOk:['searchreplace', 'help', 'spechars', 'webapp','preview','imagetemp'],
+        noOk:['searchreplace', 'help', 'spechars', 'webapp','preview','imagedialog'],
         ok:[ 'anchor', 'link', 'insertimage', 'map', 'gmap', 'insertframe', 'wordimage',
             'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'scrawl', 'template', 'music', 'background', 'charts']
     };
@@ -1013,8 +1013,8 @@
         return ui;
     };
     //
-    //editorui["imagetemp"] = function (editor, iframeUrl) {
-    //    var cmd = "imagetemp";
+    //editorui["imagedialog"] = function (editor, iframeUrl) {
+    //    var cmd = "imagedialog";
     //    var ui = new editorui.MultiMenuPop({
     //        title:'添加图片',
     //        editor:editor,

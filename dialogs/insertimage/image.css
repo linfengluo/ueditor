@@ -8,7 +8,7 @@ a{
     zoom: 1;
     width: 400px;
     *width: 395px;
-    height: 230px;
+    height: 240px;
     margin: 0 auto;
     position: relative;
     font-family: sans-serif;
@@ -56,16 +56,15 @@ a{
 }
 
 .tab-content span{
-    width: 46%;
+    width: 100px;
     display: inline-block;
     padding: 0 1%;
     height: 30px;
     border: 1px solid #ccc;
-    background: url("images/dialog-title-bg.png") repeat-x;
+    background: url("../../themes/default/images/dialog-title-bg.png") repeat-x;
     text-align: center;
     line-height: 30px;
     cursor: pointer;
-    text-align: center;
 }
 
 
@@ -79,6 +78,14 @@ a{
     padding-top: 20px;
     line-height: 30px;
 }
+
+.upload-content .text{
+    margin: 10px 0 55px;
+}
+
+.upload-content input[type="button"]{
+    cursor: pointer;
+}
 .tab-content span.focus{
     height: 31px;
     border-bottom: none;
@@ -86,11 +93,22 @@ a{
 }
 
 .upload-tab{
-
+    border-right: none;
 }
 
 .online-content{
     display: none;
+    padding-top: 20px;
+}
+
+.online-content .online-url{
+    width: 98%;
+    height: 25px;
+    margin: 20px 0 10px;
+}
+
+.online-content .text{
+    margin: 0px 0 47px;
 }
 
 .footer{

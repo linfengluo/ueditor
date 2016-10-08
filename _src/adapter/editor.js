@@ -799,6 +799,9 @@
                     editor.fireEvent("afteruiready");
                 }
             })
+            //setInterval(function(){
+            //    editor.fireEvent('contentchange');
+            //}, 500)
         };
         return editor;
     };

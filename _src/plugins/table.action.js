@@ -370,11 +370,17 @@ UE.plugins['table'] = function () {
                     utils.each(tables, function (table) {
                         removeStyleSize(table, true);
                         domUtils.removeAttributes(table, ['style', 'border']);
+                        table.style.borderSpacing = '0';
+                        table.style.borderCollapse = 'collapse';
                         utils.each(domUtils.getElementsByTagName(table, "td"), function (td) {
                             if (isEmptyBlock(td)) {
                                 domUtils.fillNode(me.document, td);
                             }
                             removeStyleSize(td, true);
+                            td.style.border = '1px solid';
+                            td.style.padding = '5px 10px';
+                            td.style.wordBreak = 'break-all';
+
 //                            domUtils.removeAttributes(td, ['style'])
                         });
                     });
@@ -1809,6 +1815,7 @@ UE.plugins['table'] = function () {
      * @param flag
      */
     function switchBorderColor(editor, flag) {
+
         var tableArr = domUtils.getElementsByTagName(editor.body, "table"), color;
         for (var i = 0, node; node = tableArr[i++];) {
             var td = domUtils.getElementsByTagName(node, "td");
