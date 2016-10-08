@@ -809,34 +809,34 @@ UE.plugins['table'] = function () {
                 return;
             }
             //当鼠标处于table上时，修改移动过程中的光标状态
-            if (target) {
-                //针对使用table作为容器的组件不触发拖拽效果
-                if (me.fireEvent('excludetable', target) === true)
-                    return;
-                pos = mouseCoords(evt);
-                var state = getRelation(target, pos),
-                    table = domUtils.findParentByTagName(target, "table", true);
-
-                if (inTableSide(table, target, evt, true)) {
-                    if (me.fireEvent("excludetable", table) === true) return;
-                    me.body.style.cursor = "url(" + me.options.cursorpath + "h.png),pointer";
-                } else if (inTableSide(table, target, evt)) {
-                    if (me.fireEvent("excludetable", table) === true) return;
-                    me.body.style.cursor = "url(" + me.options.cursorpath + "v.png),pointer";
-                } else {
-                    me.body.style.cursor = "text";
-                    var curCell = target;
-                    if (/\d/.test(state)) {
-                        state = state.replace(/\d/, '');
-                        target = getUETable(target).getPreviewCell(target, state == "v");
-                    }
-                    //位于第一行的顶部或者第一列的左边时不可拖动
-                    // toggleDraggableState(me, target ? !!state : false, target ? state : '', pos, target);
-
-                }
-            } else {
-                toggleDragButton(false, table, me);
-            }
+            //if (target) {
+            //    //针对使用table作为容器的组件不触发拖拽效果
+            //    if (me.fireEvent('excludetable', target) === true)
+            //        return;
+            //    pos = mouseCoords(evt);
+            //    var state = getRelation(target, pos),
+            //        table = domUtils.findParentByTagName(target, "table", true);
+            //
+            //    if (inTableSide(table, target, evt, true)) {
+            //        if (me.fireEvent("excludetable", table) === true) return;
+            //        //me.body.style.cursor = "url(" + me.options.cursorpath + "h.png),pointer";
+            //    } else if (inTableSide(table, target, evt)) {
+            //        if (me.fireEvent("excludetable", table) === true) return;
+            //        //me.body.style.cursor = "url(" + me.options.cursorpath + "v.png),pointer";
+            //    } else {
+            //        me.body.style.cursor = "text";
+            //        var curCell = target;
+            //        if (/\d/.test(state)) {
+            //            state = state.replace(/\d/, '');
+            //            target = getUETable(target).getPreviewCell(target, state == "v");
+            //        }
+            //        //位于第一行的顶部或者第一列的左边时不可拖动
+            //        // toggleDraggableState(me, target ? !!state : false, target ? state : '', pos, target);
+            //
+            //    }
+            //} else {
+            //    toggleDragButton(false, table, me);
+            //}
 
         } catch (e) {
             showError(e);

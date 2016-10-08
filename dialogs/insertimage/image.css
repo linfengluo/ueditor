@@ -4,6 +4,7 @@
 a{
     text-decoration: none;
 }
+
 .wrapper {
     zoom: 1;
     width: 400px;
@@ -83,9 +84,6 @@ a{
     margin: 10px 0 55px;
 }
 
-.upload-content input[type="button"]{
-    cursor: pointer;
-}
 .tab-content span.focus{
     height: 31px;
     border-bottom: none;
@@ -122,7 +120,6 @@ a{
     position: relative;
     vertical-align: middle;
     white-space: nowrap;
-    padding: 0 14px 0 14px;
     line-height: 28px;
     height: 28px;
     background-color: #eff0f3;
@@ -133,6 +130,13 @@ a{
     color: #4d4d4d;
     font-size: 12px;
     outline: none;
+}
+
+.footer .btn a{
+    height: 30px;
+    line-height: 30px;
+    padding: 0 14px;
+    display: inline-block;
 }
 
 .footer .upload-btn{
