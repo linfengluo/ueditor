@@ -78,7 +78,8 @@ UE.plugin.register('simpleupload', function (){
                             loader.setAttribute('_src', link);
                             loader.setAttribute('title', json.title || '');
                             loader.setAttribute('alt', json.original || '');
-                            loader.setAttribute('style', 'max-width: '+ imgWidth);
+                            loader.setAttribute('width',imgWidth);
+                            loader.setAttribute('style','width: ' + imgWidth);
                             loader.removeAttribute('id');
                             domUtils.removeClasses(loader, 'loadingclass');
                         } else {
