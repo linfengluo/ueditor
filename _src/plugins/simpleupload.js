@@ -71,17 +71,20 @@ UE.plugin.register('simpleupload', function (){
                         json.msg = json.msg.substring(1);
                         link = json.msg;
                         if(json.err == '' && json.msg) {
-                            var maxWidth =me.body.offsetWidth - 10;
+                            var maxWidth = browser.ie ? me.body.offsetWidth - 20 : me.body.offsetWidth - 10;
                             var imgWidth = maxWidth + "px";
                             loader = me.document.getElementById(loadingId);
                             loader.setAttribute('src', link);
                             loader.setAttribute('_src', link);
                             loader.setAttribute('title', json.title || '');
                             loader.setAttribute('alt', json.original || '');
-                            loader.setAttribute('width',imgWidth);
                             loader.setAttribute('style','max-width: ' + imgWidth);
+                            setTimeout(function(){
+                                loader.setAttribute('width', loader.offsetWidth);
+                            }, 500)
                             loader.removeAttribute('id');
                             domUtils.removeClasses(loader, 'loadingclass');
+
                         } else {
                             showErrorLoader && showErrorLoader(json.state);
                         }

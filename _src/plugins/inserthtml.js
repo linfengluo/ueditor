@@ -51,7 +51,12 @@ UE.commands['inserthtml'] = {
             me.filterInputRule(root);
             html = root.toHtml()
         }
-        div.innerHTML = utils.trim( html );
+
+        //处理base64图片；
+        var fixContent = html.replace(/\/image\/png;base64/ig, "data:image/png;base64")
+            .replace(/\/image\/jpeg;base64/ig, "data:image/jpeg;base64")
+            .replace(/\/image\/gif;base64/ig, "data:image/gif;base64");
+        div.innerHTML = utils.trim( fixContent );
 
         if ( !range.collapsed ) {
             var tmpNode = range.startContainer;

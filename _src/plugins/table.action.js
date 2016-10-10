@@ -378,7 +378,7 @@ UE.plugins['table'] = function () {
                             }
                             removeStyleSize(td, true);
                             td.style.border = '1px solid';
-                            td.style.padding = '5px 10px';
+                            td.style.padding = '2px 5px';
                             td.style.wordBreak = 'break-all';
 
 //                            domUtils.removeAttributes(td, ['style'])

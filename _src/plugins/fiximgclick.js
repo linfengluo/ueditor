@@ -31,6 +31,10 @@ UE.plugins['fiximgclick'] = (function () {
 
         Scale.prototype = {
             init: function (editor) {
+
+                if(browser.ie){
+                    return;
+                }
                 var me = this;
                 me.editor = editor;
                 me.startPos = this.prePos = {x: 0, y: 0};

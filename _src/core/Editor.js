@@ -830,10 +830,9 @@
 
             me.fireEvent('beforesetcontent', html);
             var root = UE.htmlparser(html);
+
             me.filterInputRule(root);
             html = root.toHtml();
-
-
             me.body.innerHTML = (isAppendTo ? me.body.innerHTML : '') + html;
 
 

@@ -60,8 +60,6 @@ UE.plugin.register('autoupload', function (){
                 '/images/spacer.gif" title="' + (me.getLang('autoupload.loading') || '') + '" >' +
                 '</p>';
             successHandler = function(data) {
-                console.log(data);
-                console.log("^^^^^^^^^^^")
                 var link = urlPrefix + data.url,
                     loader = me.document.getElementById(loadingId);
 
@@ -120,6 +118,7 @@ UE.plugin.register('autoupload', function (){
     function getPasteImage(e){
         return e.clipboardData && e.clipboardData.items && e.clipboardData.items.length == 1 && /^image\//.test(e.clipboardData.items[0].type) ? e.clipboardData.items:null;
     }
+
     function getDropImage(e){
         return  e.dataTransfer && e.dataTransfer.files ? e.dataTransfer.files:null;
     }
@@ -147,6 +146,7 @@ UE.plugin.register('autoupload', function (){
                             items;
                         //获取粘贴板文件列表或者拖放文件列表
                         items = e.type == 'paste' ? getPasteImage(e):getDropImage(e);
+
                         if(items){
                             var len = items.length,
                                 file;
