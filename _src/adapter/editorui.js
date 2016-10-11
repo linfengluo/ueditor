@@ -488,7 +488,7 @@
             },
             onselect:function (t, index) {
                 editor.execCommand('FontSize', this.items[index].value);
-            },
+            }
         });
         editorui.buttons['fontsize'] = ui;
         editor.addListener('selectionchange', function (type, causeByUi, uiReady) {
@@ -913,7 +913,7 @@
                 },
                 onclick:function () {
                     editor.execCommand('justify', this.value);
-                },
+                }
             });
         }
         //创建下来框
@@ -958,9 +958,7 @@
         var ui = new UE.ui.Button({
             className:'attachmentWrap',
             editor:editor,
-            title:'附件',
-            onclick:function () {
-            },
+            title:'附件'
         });
 
         editorui.buttons['attachment'] = ui;
@@ -985,7 +983,7 @@
                     theme:editor.options.theme,
                     renderLabelHtml:function () {
                         return '<div class="edui-label edui-listitem-label edui-default" id="J_cloudFile" data-toggle="modal" data-target="#cloud-file">' + (this.label || '') + '</div>';
-                    },
+                    }
                 });
             })(ci.label || langLabel, ci.val)
         }
@@ -996,7 +994,7 @@
                 this.showPopup();
             },
             title:title,
-            className:'edui-for-cloudfile',
+            className:'edui-for-cloudfile'
         });
         editorui.buttons['cloudfile'] = ui;
         editor.addListener('selectionchange', function (type, causeByUi, uiReady) {

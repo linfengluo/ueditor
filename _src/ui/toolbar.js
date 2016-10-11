@@ -25,7 +25,7 @@
             for (var i=0; i<this.items.length; i++) {
                 buff[i] = this.items[i].renderHtml();
             }
-            return '<div id="##" class="edui-toolbar %%" onselectstart="return false;" onmousedown="return $$._onMouseDown(event, this);">' +
+            return '<div id="##" class="edui-toolbar %%">' +
                 buff.join('') +
                 '</div>'
         },

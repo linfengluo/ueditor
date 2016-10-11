@@ -38,12 +38,12 @@
             'attachment','cloudfile','bold', 'italic', 'underline','fontfamily', 'fontsize', 'forecolor', 'backcolor', '|',
             'justifymenu', 'insertunorderedlist','addindent','reduceindent', '|',
             'imagedialog', 'emotion','inserttable',
-            'link', 'unlink', 'selectall', 'source',
+            'link', 'unlink', 'selectall', 'source'
         ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         ,labelMap:{
             'justifymenu':'对齐',
-            'imagedialog':"添加图片",
+            'imagedialog':"添加图片"
         }
 
         //语言配置项,默认是zh-cn。有需要的话也可以使用如下这样的方式来自动多语言切换，当然，前提条件是lang文件夹下存在对应的语言文件：
@@ -101,7 +101,7 @@
         ,imagePopup:false     //图片操作的浮层开关，默认打开
 
         //,autoSyncData:true //自动同步编辑器要提交的数据
-        //,emotionLocalization:false //是否开启表情本地化，默认关闭。若要开启请确保emotion文件夹下包含官网提供的images表情文件夹
+        ,emotionLocalization:true //是否开启表情本地化，默认关闭。若要开启请确保emotion文件夹下包含官网提供的images表情文件夹
 
         //粘贴只保留标签，去除标签所有属性
         //,retainOnlyLabelPasted: false
@@ -161,7 +161,7 @@
             //'circle' : '',  // '○ 小圆圈'
             //'square' : ''   //'■ 小方块'
             'decimal' : '' ,         //'1,2,3...'
-            'disc' : '',    // '● 小圆点'
+            'disc' : ''    // '● 小圆点'
         }
         //,listDefaultPaddingLeft : '30'//默认的左边缩进的基数倍
         //,listiconpath : 'http://bs.baidu.com/listicon/'//自定义标号的路径

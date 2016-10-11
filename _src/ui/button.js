@@ -35,10 +35,9 @@
             if(this.className === 'attachmentWrap'){
                 return '<div id="##" class="edui-box %%">' +
                     '<div id="##_state" stateful>' +
-                    '<div class="%%-wrap"><div id="##_body" unselectable="on" ' + (this.title ? 'title="' + this.title + '"' : '') +
-                    ' class="%%-body" onmousedown="return $$._onMouseDown(event, this);" onclick="return $$._onClick(event, this);">' +
-                    (this.showIcon ? '<div class="edui-box edui-icon"><input type="hidden" name="uploadControlClientID" id="uploadControlClientID" style="display: none;"></div>' : '') +
-                    (this.showText ? '<div class="edui-box edui-label">' + this.label + '</div>' : '') +
+                    '<div class="%%-wrap"><div id="##_body"' + (this.title ? 'title="' + this.title + '"' : '') +
+                    ' class="%%-body">' +
+                    (this.showIcon ? '<a class="edui-box edui-icon"><input type="hidden" name="uploadControlClientID" id="uploadControlClientID" ></a>' : '') +
                     '</div>' +
                     '</div>' +
                     '</div></div>';
