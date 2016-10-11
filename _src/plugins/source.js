@@ -30,7 +30,8 @@
                     textarea.style.height = textarea.scrollHeight + 10 + 'px';
                 },
                 getContent: function (){
-                    return textarea.value;
+                    var value = textarea.value.replace(/<!DOCTYPE html>|<html.*>|<\/html>|<head.*>|<\/head>|<meta.*>|<title>.*<\/title>|<body.*>|<\/body>/ig,"");
+                    return value;
                 },
                 select: function (){
                     var range;
@@ -73,7 +74,8 @@
                     codeEditor.setValue(content);
                 },
                 getContent: function (){
-                    return codeEditor.getValue();
+                    var value = codeEditor.getValue().replace(/<!DOCTYPE html>|<html.*>|<\/html>|<head.*>|<\/head>|<meta.*>|<title>.*<\/title>|<body.*>|<\/body>/ig,"");
+                    return value;
                 },
                 select: function (){
                     codeEditor.focus();
