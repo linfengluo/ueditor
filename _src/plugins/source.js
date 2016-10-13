@@ -95,7 +95,7 @@
         var sourceMode = false;
         var sourceEditor;
         var orgSetContent;
-        opt.sourceEditor = browser.ie  ? 'textarea' : (opt.sourceEditor || 'codemirror');
+        opt.sourceEditor = browser.ie ? 'textarea' : (opt.sourceEditor || 'codemirror');
 
         me.setOpt({
             sourceEditorFirst:false
@@ -228,7 +228,13 @@
                         me.body.innerHTML = '<p>'+(browser.ie?'':'<br/>')+'</p>';
                         first = me.body.firstChild;
                     }
-                    me.iframe.style.minHeight = me.body.offsetHeight + 'px';
+
+                    setTimeout(function(){
+                        me.iframe.style.minHeight = me.body.offsetHeight + 'px';
+                        setTimeout(function(){
+                            me.iframe.style.minHeight = me.body.offsetHeight + 'px';
+                        }, 1000)
+                    }, 500)
 
                     //要在ifm为显示时ff才能取到selection,否则报错
                     //这里不能比较位置了
@@ -261,6 +267,7 @@
                     }
                 }
                 this.fireEvent('sourcemodechanged', sourceMode);
+
                 setTimeout(function(){
                     me.fireEvent('contentchange');
                 }, 200)

@@ -372,6 +372,7 @@ UE.plugins['table'] = function () {
                         domUtils.removeAttributes(table, ['style', 'border']);
                         table.style.borderSpacing = '0';
                         table.style.borderCollapse = 'collapse';
+                        table.style.backgroundColor = '#ffffff';
                         utils.each(domUtils.getElementsByTagName(table, "td"), function (td) {
                             if (isEmptyBlock(td)) {
                                 domUtils.fillNode(me.document, td);
