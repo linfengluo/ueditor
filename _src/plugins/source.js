@@ -10,9 +10,16 @@
             var minHeight = editor.body.offsetHeight + 'px';
             var textarea = holder.ownerDocument.createElement('textarea');
             textarea.style.cssText = 'position:relative;resize:none;width:100%;border:0;padding:0;margin:0;overflow:auto;min-height:'+ minHeight;
-            textarea.addEventListener('input', function(){
-                textarea.style.height = textarea.scrollHeight + 10 + 'px';
-            })
+            if(browser.ie && browser.version <= 8){
+                textarea.attachEvent("onpropertychange", function(){
+                    textarea.style.height = textarea.scrollHeight + 20 + 'px';
+                });
+            }else{
+                textarea.addEventListener('input', function(){
+                    textarea.style.height = textarea.scrollHeight + 20 + 'px';
+                })
+            }
+
 
             // todo: IE下只有onresize属性可用... 很纠结
             if (browser.ie && browser.version < 8) {
@@ -20,14 +27,14 @@
                 textarea.style.height = holder.offsetHeight + 'px';
                 holder.onresize = function (){
                     textarea.style.width = holder.offsetWidth + 'px';
-                    textarea.style.height = holder.offsetHeight + 'px';
+                    textarea.style.minHeight = holder.offsetHeight + 'px';
                 };
             }
             holder.appendChild(textarea);
             return {
                 setContent: function (content){
                     textarea.value = content;
-                    textarea.style.height = textarea.scrollHeight + 10 + 'px';
+                    textarea.style.height = textarea.scrollHeight + 20 + 'px';
                 },
                 getContent: function (){
                     var value = textarea.value.replace(/<!DOCTYPE html>|<html.*>|<\/html>|<head.*>|<\/head>|<meta.*>|<title>.*<\/title>|<body.*>|<\/body>/ig,"");
@@ -149,6 +156,7 @@
 
                     bakCssText = me.iframe.style.cssText;
                     me.iframe.style.cssText += 'position:absolute;left:-32768px;top:-32768px;';
+                    me.iframe.style.position = 'absolute';
 
 
                     me.fireEvent('beforegetcontent');
@@ -229,10 +237,14 @@
                         first = me.body.firstChild;
                     }
 
+                    var height = parseInt(me.body.style.height);
+                    var heightArr = [me.body.clientHeight, me.body.scrollHeight, me.body.offsetHeight, height];
+                    var maxHeight = Math.max.apply(null, heightArr);
+                    me.iframe.style.minHeight = maxHeight + 'px';
                     setTimeout(function(){
-                        me.iframe.style.minHeight = me.body.offsetHeight + 'px';
+                        me.iframe.style.minHeight = maxHeight + 'px';
                         setTimeout(function(){
-                            me.iframe.style.minHeight = me.body.offsetHeight + 'px';
+                            me.iframe.style.minHeight = maxHeight + 'px';
                         }, 1000)
                     }, 500)
 
@@ -244,7 +256,6 @@
 
                         var input = document.createElement('input');
                         input.style.cssText = 'position:absolute;left:0;top:-32768px';
-
                         document.body.appendChild(input);
 
                         me.body.contentEditable = false;
@@ -256,14 +267,12 @@
                                 me.selection.getRange().moveToAddress(bakAddress).select(true);
                                 domUtils.remove(input);
                             });
-
                         });
                     }else{
                         //ie下有可能报错，比如在代码顶头的情况
                         try{
                             me.selection.getRange().moveToAddress(bakAddress).select(true);
                         }catch(e){}
-
                     }
                 }
                 this.fireEvent('sourcemodechanged', sourceMode);
@@ -315,7 +324,5 @@
 
             });
         }
-
     };
-
 })();
