@@ -81,7 +81,13 @@ a{
 }
 
 .upload-content .text{
-    margin: 10px 0 55px;
+    margin: 10px 0 5px;
+}
+
+.errorTip{
+    height: 30px;
+    color: #ff1706;
+    visibility: hidden;
 }
 
 .tab-content span.focus{

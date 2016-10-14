@@ -49,7 +49,13 @@ UE.plugin.register('simpleupload', function (){
             var iframe = btnIframeDoc.getElementById('edui_iframe_' + timestrap);
 
             domUtils.on(input, 'change', function(){
+                var dialog = me.getDialog('imagedialog');
+                var testType = /(\.png$)|(\.jpg$)|(\.gif$)|(\.jpeg$)/ig.test(input.value);
                 if(!input.value) return;
+                if(!testType){
+                    document.getElementById(dialog.id + '_iframe').contentWindow.document.getElementById('errorTips').style.visibility = 'visible';
+                    return;
+                }
                 var loadingId = 'loading_' + (+new Date()).toString(36);
 
                 var allowFiles = me.getOpt('imageAllowFiles');
@@ -57,7 +63,6 @@ UE.plugin.register('simpleupload', function (){
                 me.focus();
                 me.execCommand('inserthtml', '<img class="loadingclass" id="' + loadingId + '" src="' + me.options.themePath + me.options.theme +'/images/spacer.gif" title="' + (me.getLang('simpleupload.loading') || '') + '" >');
 
-                var dialog = me.getDialog('imagedialog');
                 if(dialog){
                     dialog._hide();
                 }
