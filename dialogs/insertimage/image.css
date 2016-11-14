@@ -109,10 +109,27 @@ a{
     width: 98%;
     height: 25px;
     margin: 20px 0 10px;
+    position: relative;
+    display: inline-block;
+    height: 28px;
+    cursor: text;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #666;
+    background-color: #fff;
+    border: 1px solid #E0E2E4;
+    border-radius: 6px;
+    transition: border 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.online-content .online-url:focus{
+    border-color: #57c5f7;
+    outline: 0;
+    box-shadow: 0 0 0 1px rgba(11, 156, 221, 0.2);
 }
 
 .online-content .text{
-    margin: 0px 0 47px;
+    margin: 0px 0 45px;
 }
 
 .footer{
@@ -123,19 +140,22 @@ a{
 
 .footer .btn{
     display: inline-block;
-    position: relative;
+    margin-bottom: 0;
+    font-weight: 500;
+    text-align: center;
     vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid #E0E2E4;
     white-space: nowrap;
-    line-height: 28px;
-    height: 28px;
-    background-color: #eff0f3;
-    -webkit-border-radius: 1px;
-    -moz-border-radius: 1px;
-    border-radius: 1px;
-    border: 1px solid #cdcdcd;
-    color: #4d4d4d;
+    line-height: 1.5;
     font-size: 12px;
-    outline: none;
+    border-radius: 2px;
+    user-select: none;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform: translate3d(0, 0, 0);
+    color: #666;
+    background-color: #f7f7f7;
 }
 
 .footer .btn a{
@@ -147,9 +167,8 @@ a{
 
 .footer .upload-btn{
     color: #fff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-    background-color: #f90;
-    border-color: #d97b00;
+    background-color: #0b9cdd;
+    border-color: #0b9cdd;
 }
 
 .footer .upload-btn a{

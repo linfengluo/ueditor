@@ -36,12 +36,6 @@
     vertical-align: middle;
 }
 
-.edui-default .edui-menuitem .edui-icon {
-    /*width: 20px !important;*/
-    /*height: 20px !important;*/
-    /*background: url(../images/icons.png) 0 -4000px;*/
-    /*background: url(../images/icons.gif) 0 -4000px\9;*/
-}
 
 .edui-default .edui-menuitem .edui-label {
     font-size: 12px;
@@ -66,7 +60,7 @@
 }
 
 .edui-default .edui-state-checked .edui-menuitem-body {
-    background-color: #4f96f2;
+    background-color: #2db7f5;
 }
 
 .edui-for-cloudfile .edui-default .edui-state-checked .edui-menuitem-body {
@@ -79,7 +73,7 @@
 .edui-for-paragraph .edui-default .edui-state-checked .edui-menuitem-body,
 .edui-for-fontfamily .edui-default .edui-state-checked .edui-menuitem-body,
 .edui-for-justifyMenuItem .edui-default .edui-state-checked .edui-menuitem-body{
-    background-color: #4f96f2;
+    background-color: #2db7f5;
 }
 
 .edui-default .edui-state-disabled .edui-menuitem-label {

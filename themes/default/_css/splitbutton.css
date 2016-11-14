@@ -1,11 +1,11 @@
-/*splitbutton*/
-.edui-default .edui-toolbar .edui-splitbutton-body .edui-arrow,
-.edui-default .edui-toolbar .edui-menubutton-body .edui-arrow {
-    background: url(../images/icons.png) -741px 0;
-    _background: url(../images/icons.gif) -741px 0;
-    height: 20px;
-    width: 9px;
-}
+/*!*splitbutton*!*/
+/*.edui-default .edui-toolbar .edui-splitbutton-body .edui-arrow,*/
+/*.edui-default .edui-toolbar .edui-menubutton-body .edui-arrow {*/
+    /*background: url(../images/icons.png) -741px 0;*/
+    /*_background: url(../images/icons.gif) -741px 0;*/
+    /*height: 20px;*/
+    /*width: 9px;*/
+/*}*/
 
 .edui-default .edui-toolbar .edui-splitbutton .edui-splitbutton-body,
 .edui-default .edui-toolbar .edui-menubutton .edui-menubutton-body {

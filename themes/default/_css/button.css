@@ -1,12 +1,12 @@
 /*普通按钮样式及状态*/
-.edui-default .edui-toolbar .edui-button .edui-icon,
-.edui-default .edui-toolbar .edui-menubutton .edui-icon,
-.edui-default .edui-toolbar .edui-splitbutton .edui-icon {
-    height: 20px !important;
-    width: 20px !important;
-    background-image: url(../images/icons.png);
-    background-image: url(../images/icons.gif) \9;
-}
+/*.edui-default .edui-toolbar .edui-button .edui-icon,*/
+/*.edui-default .edui-toolbar .edui-menubutton .edui-icon,*/
+/*.edui-default .edui-toolbar .edui-splitbutton .edui-icon {*/
+    /*height: 20px !important;*/
+    /*width: 20px !important;*/
+    /*background-image: url(../images/icons.png);*/
+    /*background-image: url(../images/icons.gif) \9;*/
+/*}*/
 
 .edui-default .edui-toolbar .attachmentWrap .edui-icon {
     width: 76px !important;
