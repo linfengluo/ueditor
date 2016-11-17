@@ -186,8 +186,8 @@
 }
 
 .edui-default .edui-dialog-modalmask {
-    opacity: 0.8;
-    filter: alpha(opacity = 80);
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
     background-color: #000000;
     position: absolute;
     /*z-index: 1999;*/

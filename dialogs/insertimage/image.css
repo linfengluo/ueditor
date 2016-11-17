@@ -166,6 +166,7 @@ a{
 }
 
 .footer .upload-btn{
+    position: relative;
     color: #fff;
     background-color: #0b9cdd;
     border-color: #0b9cdd;
