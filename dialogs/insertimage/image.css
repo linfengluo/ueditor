@@ -159,8 +159,8 @@ a{
 }
 
 .footer .btn a{
-    height: 30px;
-    line-height: 30px;
+    height: 28px;
+    line-height: 28px;
     padding: 0 14px;
     display: inline-block;
 }
@@ -168,8 +168,13 @@ a{
 .footer .upload-btn{
     position: relative;
     color: #fff;
-    background-color: #0b9cdd;
-    border-color: #0b9cdd;
+    background-color: #ff8500;
+    border-color: #d97b00;
+}
+
+.footer .upload-btn:hover{
+    background-color: #ffb666;
+    border-color: #ffac40;
 }
 
 .footer .upload-btn a{

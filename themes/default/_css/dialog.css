@@ -158,11 +158,9 @@
 
 .edui-default .edui-dialog-buttons .edui-okbutton .edui-button-body{
     color: #fff;
-    background-color: #0b9cdd;
-    border-color: #0b9cdd;
+    background-color: #ff8500;
+    border-color: #d97b00;
 }
-
-
 
 .edui-default .edui-dialog-buttons .edui-button .edui-label{
     height: 28px;
@@ -171,7 +169,8 @@
 }
 
 .edui-default .edui-dialog-buttons .edui-okbutton .edui-state-hover .edui-button-body {
-    background-color: #0b9cdd;
+    background-color: #ffb666;
+    border-color: #ffac40;
 }
 
 .edui-default .edui-dialog-buttons .edui-cancelbutton .edui-state-hover .edui-button-body {
