@@ -45,7 +45,7 @@ UE.plugin.register('copy', function () {
                         initZeroClipboard();
                     } else {
                         utils.loadFile(document, {
-                            src: me.options.UEDITOR_HOME_URL + "third-party/zeroclipboard/ZeroClipboard.js",
+                            src: me.options.UEDITOR_HOME_URL + "third-party/zeroclipboard/ZeroClipboard.min.js",
                             tag: "script",
                             type: "text/javascript",
                             defer: "defer"

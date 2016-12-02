@@ -2365,7 +2365,7 @@ var domUtils = dom.domUtils = {
         if(!utils .isFunction(filter)){
             var str = filter;
             filter = function(n){
-                return utils.indexOf(utils.isArray(str) ? str:str.split(' '), n.tagName.toLowerCase()) != -1
+                return utils.indexOf(utils.isArray(str) ? str:str.split(' '), n.tagName && n.tagName.toLowerCase()) != -1
             };
         }
         utils.each(nodelist,function(n){

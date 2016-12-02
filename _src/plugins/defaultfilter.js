@@ -4,8 +4,8 @@
 UE.plugins['defaultfilter'] = function () {
     var me = this;
     me.setOpt({
-        'allowDivTransToP':true,
-        'disabledTableInTable':true
+        'allowDivTransToP':false,
+        'disabledTableInTable':false
     });
     //默认的过滤处理
     //进入编辑器的内容处理
@@ -32,7 +32,6 @@ UE.plugins['defaultfilter'] = function () {
                     return;
                 }
                 switch (node.tagName) {
-                    case 'style':
                     case 'script':
                         node.setAttr({
                             cdata_tag: node.tagName,
