@@ -84,9 +84,7 @@ UE.plugin.register('simpleupload', function (){
                             loader.setAttribute('title', json.title || '');
                             loader.setAttribute('alt', json.original || '');
                             loader.setAttribute('style','max-width: ' + imgWidth);
-                            setTimeout(function(){
-                                loader.setAttribute('width', loader.offsetWidth);
-                            }, 500)
+                            setWidth(loader, 0);
                             loader.removeAttribute('id');
                             domUtils.removeClasses(loader, 'loadingclass');
 
@@ -99,8 +97,24 @@ UE.plugin.register('simpleupload', function (){
                     form.reset();
                     setTimeout(function(){
                         me.fireEvent('contentchange');
-                    }, 300)
+                    }, 300);
                     domUtils.un(iframe, 'load', callback);
+                }
+
+                function setWidth(loader, timer){
+
+                    setTimeout(function(){
+                        if((loader.width === 22 || loader.width === 0) && timer < 50){
+                            timer++;
+                            setWidth(loader, timer);
+                        }else{
+                            loader.setAttribute('width', loader.offsetWidth);
+                            setTimeout(function(){
+                                me.fireEvent('contentchange');
+                            }, 100);
+                        }
+                    }, 500);
+
                 }
                 function showErrorLoader(title){
                     if(loadingId) {

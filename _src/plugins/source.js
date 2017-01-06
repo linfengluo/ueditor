@@ -149,9 +149,7 @@
                     if(browser.gecko){
                         me.body.contentEditable = false;
                     }
-                    var minHeight = me.iframe.parentNode.parentNode.parentNode.style.minHeight;
                     me.iframe.parentNode.style.height = 'auto';
-                    me.iframe.parentNode.style.minHeight = minHeight;
 
 
                     bakCssText = me.iframe.style.cssText;
@@ -238,7 +236,7 @@
                     }
 
                     var height = parseInt(me.body.style.height);
-                    var heightArr = [me.body.clientHeight, me.body.scrollHeight, me.body.offsetHeight, height];
+                    var heightArr = [me.body.clientHeight, parseInt(me.iframe.parentNode.style.minHeight) - 5, me.body.offsetHeight, height];
                     var maxHeight = Math.max.apply(null, heightArr);
                     me.iframe.style.minHeight = maxHeight + 'px';
                     setTimeout(function(){
